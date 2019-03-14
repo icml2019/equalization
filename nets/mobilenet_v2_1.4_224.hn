@@ -1,0 +1,935 @@
+{
+    "name": "mobilenet_v2_1.4_224", 
+    "layers": {
+        "input_layer": {
+            "type": "input_layer", 
+            "input": [], 
+            "output": ["conv1"], 
+            "input_shapes": [[-1, 224, 224, 3]], 
+            "output_shapes": [[-1, 224, 224, 3]], 
+            "original_names": ["MobilenetV2/input"]
+        }, 
+        "conv1": {
+            "type": "conv", 
+            "input": ["input_layer"], 
+            "output": ["dw1"], 
+            "input_shapes": [[-1, 224, 224, 3]], 
+            "output_shapes": [[-1, 112, 112, 48]], 
+            "original_names": ["MobilenetV2/Conv/Conv2D", "MobilenetV2/Conv/BatchNorm/FusedBatchNorm", "MobilenetV2/Conv/Relu6"], 
+            "params": {
+                "kernel_shape": [3, 3, 3, 48], 
+                "strides": [1, 2, 2, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "dw1": {
+            "type": "dw", 
+            "input": ["conv1"], 
+            "output": ["conv2"], 
+            "input_shapes": [[-1, 112, 112, 48]], 
+            "output_shapes": [[-1, 112, 112, 48]], 
+            "original_names": ["MobilenetV2/expanded_conv/depthwise/depthwise", "MobilenetV2/expanded_conv/depthwise/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv/depthwise/Relu6"], 
+            "params": {
+                "kernel_shape": [3, 3, 48, 1], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "conv2": {
+            "type": "conv", 
+            "input": ["dw1"], 
+            "output": ["conv3"], 
+            "input_shapes": [[-1, 112, 112, 48]], 
+            "output_shapes": [[-1, 112, 112, 24]], 
+            "original_names": ["MobilenetV2/expanded_conv/project/Conv2D", "MobilenetV2/expanded_conv/project/BatchNorm/FusedBatchNorm"], 
+            "params": {
+                "kernel_shape": [1, 1, 48, 24], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "conv3": {
+            "type": "conv", 
+            "input": ["conv2"], 
+            "output": ["dw2"], 
+            "input_shapes": [[-1, 112, 112, 24]], 
+            "output_shapes": [[-1, 112, 112, 144]], 
+            "original_names": ["MobilenetV2/expanded_conv_1/expand/Conv2D", "MobilenetV2/expanded_conv_1/expand/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_1/expand/Relu6"], 
+            "params": {
+                "kernel_shape": [1, 1, 24, 144], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "dw2": {
+            "type": "dw", 
+            "input": ["conv3"], 
+            "output": ["conv4"], 
+            "input_shapes": [[-1, 112, 112, 144]], 
+            "output_shapes": [[-1, 56, 56, 144]], 
+            "original_names": ["MobilenetV2/expanded_conv_1/depthwise/depthwise", "MobilenetV2/expanded_conv_1/depthwise/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_1/depthwise/Relu6"], 
+            "params": {
+                "kernel_shape": [3, 3, 144, 1], 
+                "strides": [1, 2, 2, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "conv4": {
+            "type": "conv", 
+            "input": ["dw2"], 
+            "output": ["conv5", "conv6"], 
+            "input_shapes": [[-1, 56, 56, 144]], 
+            "output_shapes": [[-1, 56, 56, 32]], 
+            "original_names": ["MobilenetV2/expanded_conv_1/project/Conv2D", "MobilenetV2/expanded_conv_1/project/BatchNorm/FusedBatchNorm"], 
+            "params": {
+                "kernel_shape": [1, 1, 144, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "conv5": {
+            "type": "conv", 
+            "input": ["conv4"], 
+            "output": ["dw3"], 
+            "input_shapes": [[-1, 56, 56, 32]], 
+            "output_shapes": [[-1, 56, 56, 192]], 
+            "original_names": ["MobilenetV2/expanded_conv_2/expand/Conv2D", "MobilenetV2/expanded_conv_2/expand/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_2/expand/Relu6"], 
+            "params": {
+                "kernel_shape": [1, 1, 32, 192], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "dw3": {
+            "type": "dw", 
+            "input": ["conv5"], 
+            "output": ["conv6"], 
+            "input_shapes": [[-1, 56, 56, 192]], 
+            "output_shapes": [[-1, 56, 56, 192]], 
+            "original_names": ["MobilenetV2/expanded_conv_2/depthwise/depthwise", "MobilenetV2/expanded_conv_2/depthwise/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_2/depthwise/Relu6"], 
+            "params": {
+                "kernel_shape": [3, 3, 192, 1], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "conv6": {
+            "type": "conv", 
+            "input": ["dw3", "conv4"], 
+            "output": ["conv7"], 
+            "input_shapes": [[-1, 56, 56, 192]], 
+            "output_shapes": [[-1, 56, 56, 32]], 
+            "original_names": ["MobilenetV2/expanded_conv_2/project/Conv2D", "MobilenetV2/expanded_conv_2/project/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_2/add"], 
+            "params": {
+                "kernel_shape": [1, 1, 192, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": true, 
+                "activation": "linear"
+            }
+        }, 
+        "conv7": {
+            "type": "conv", 
+            "input": ["conv6"], 
+            "output": ["dw4"], 
+            "input_shapes": [[-1, 56, 56, 32]], 
+            "output_shapes": [[-1, 56, 56, 192]], 
+            "original_names": ["MobilenetV2/expanded_conv_3/expand/Conv2D", "MobilenetV2/expanded_conv_3/expand/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_3/expand/Relu6"], 
+            "params": {
+                "kernel_shape": [1, 1, 32, 192], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "dw4": {
+            "type": "dw", 
+            "input": ["conv7"], 
+            "output": ["conv8"], 
+            "input_shapes": [[-1, 56, 56, 192]], 
+            "output_shapes": [[-1, 28, 28, 192]], 
+            "original_names": ["MobilenetV2/expanded_conv_3/depthwise/depthwise", "MobilenetV2/expanded_conv_3/depthwise/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_3/depthwise/Relu6"], 
+            "params": {
+                "kernel_shape": [3, 3, 192, 1], 
+                "strides": [1, 2, 2, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "conv8": {
+            "type": "conv", 
+            "input": ["dw4"], 
+            "output": ["conv9", "conv10"], 
+            "input_shapes": [[-1, 28, 28, 192]], 
+            "output_shapes": [[-1, 28, 28, 48]], 
+            "original_names": ["MobilenetV2/expanded_conv_3/project/Conv2D", "MobilenetV2/expanded_conv_3/project/BatchNorm/FusedBatchNorm"], 
+            "params": {
+                "kernel_shape": [1, 1, 192, 48], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "conv9": {
+            "type": "conv", 
+            "input": ["conv8"], 
+            "output": ["dw5"], 
+            "input_shapes": [[-1, 28, 28, 48]], 
+            "output_shapes": [[-1, 28, 28, 288]], 
+            "original_names": ["MobilenetV2/expanded_conv_4/expand/Conv2D", "MobilenetV2/expanded_conv_4/expand/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_4/expand/Relu6"], 
+            "params": {
+                "kernel_shape": [1, 1, 48, 288], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "dw5": {
+            "type": "dw", 
+            "input": ["conv9"], 
+            "output": ["conv10"], 
+            "input_shapes": [[-1, 28, 28, 288]], 
+            "output_shapes": [[-1, 28, 28, 288]], 
+            "original_names": ["MobilenetV2/expanded_conv_4/depthwise/depthwise", "MobilenetV2/expanded_conv_4/depthwise/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_4/depthwise/Relu6"], 
+            "params": {
+                "kernel_shape": [3, 3, 288, 1], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "conv10": {
+            "type": "conv", 
+            "input": ["dw5", "conv8"], 
+            "output": ["conv11", "conv12"], 
+            "input_shapes": [[-1, 28, 28, 288]], 
+            "output_shapes": [[-1, 28, 28, 48]], 
+            "original_names": ["MobilenetV2/expanded_conv_4/project/Conv2D", "MobilenetV2/expanded_conv_4/project/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_4/add"], 
+            "params": {
+                "kernel_shape": [1, 1, 288, 48], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": true, 
+                "activation": "linear"
+            }
+        }, 
+        "conv11": {
+            "type": "conv", 
+            "input": ["conv10"], 
+            "output": ["dw6"], 
+            "input_shapes": [[-1, 28, 28, 48]], 
+            "output_shapes": [[-1, 28, 28, 288]], 
+            "original_names": ["MobilenetV2/expanded_conv_5/expand/Conv2D", "MobilenetV2/expanded_conv_5/expand/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_5/expand/Relu6"], 
+            "params": {
+                "kernel_shape": [1, 1, 48, 288], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "dw6": {
+            "type": "dw", 
+            "input": ["conv11"], 
+            "output": ["conv12"], 
+            "input_shapes": [[-1, 28, 28, 288]], 
+            "output_shapes": [[-1, 28, 28, 288]], 
+            "original_names": ["MobilenetV2/expanded_conv_5/depthwise/depthwise", "MobilenetV2/expanded_conv_5/depthwise/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_5/depthwise/Relu6"], 
+            "params": {
+                "kernel_shape": [3, 3, 288, 1], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "conv12": {
+            "type": "conv", 
+            "input": ["dw6", "conv10"], 
+            "output": ["conv13"], 
+            "input_shapes": [[-1, 28, 28, 288]], 
+            "output_shapes": [[-1, 28, 28, 48]], 
+            "original_names": ["MobilenetV2/expanded_conv_5/project/Conv2D", "MobilenetV2/expanded_conv_5/project/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_5/add"], 
+            "params": {
+                "kernel_shape": [1, 1, 288, 48], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": true, 
+                "activation": "linear"
+            }
+        }, 
+        "conv13": {
+            "type": "conv", 
+            "input": ["conv12"], 
+            "output": ["dw7"], 
+            "input_shapes": [[-1, 28, 28, 48]], 
+            "output_shapes": [[-1, 28, 28, 288]], 
+            "original_names": ["MobilenetV2/expanded_conv_6/expand/Conv2D", "MobilenetV2/expanded_conv_6/expand/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_6/expand/Relu6"], 
+            "params": {
+                "kernel_shape": [1, 1, 48, 288], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "dw7": {
+            "type": "dw", 
+            "input": ["conv13"], 
+            "output": ["conv14"], 
+            "input_shapes": [[-1, 28, 28, 288]], 
+            "output_shapes": [[-1, 14, 14, 288]], 
+            "original_names": ["MobilenetV2/expanded_conv_6/depthwise/depthwise", "MobilenetV2/expanded_conv_6/depthwise/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_6/depthwise/Relu6"], 
+            "params": {
+                "kernel_shape": [3, 3, 288, 1], 
+                "strides": [1, 2, 2, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "conv14": {
+            "type": "conv", 
+            "input": ["dw7"], 
+            "output": ["conv15", "conv16"], 
+            "input_shapes": [[-1, 14, 14, 288]], 
+            "output_shapes": [[-1, 14, 14, 88]], 
+            "original_names": ["MobilenetV2/expanded_conv_6/project/Conv2D", "MobilenetV2/expanded_conv_6/project/BatchNorm/FusedBatchNorm"], 
+            "params": {
+                "kernel_shape": [1, 1, 288, 88], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "conv15": {
+            "type": "conv", 
+            "input": ["conv14"], 
+            "output": ["dw8"], 
+            "input_shapes": [[-1, 14, 14, 88]], 
+            "output_shapes": [[-1, 14, 14, 528]], 
+            "original_names": ["MobilenetV2/expanded_conv_7/expand/Conv2D", "MobilenetV2/expanded_conv_7/expand/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_7/expand/Relu6"], 
+            "params": {
+                "kernel_shape": [1, 1, 88, 528], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "dw8": {
+            "type": "dw", 
+            "input": ["conv15"], 
+            "output": ["conv16"], 
+            "input_shapes": [[-1, 14, 14, 528]], 
+            "output_shapes": [[-1, 14, 14, 528]], 
+            "original_names": ["MobilenetV2/expanded_conv_7/depthwise/depthwise", "MobilenetV2/expanded_conv_7/depthwise/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_7/depthwise/Relu6"], 
+            "params": {
+                "kernel_shape": [3, 3, 528, 1], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "conv16": {
+            "type": "conv", 
+            "input": ["dw8", "conv14"], 
+            "output": ["conv17", "conv18"], 
+            "input_shapes": [[-1, 14, 14, 528]], 
+            "output_shapes": [[-1, 14, 14, 88]], 
+            "original_names": ["MobilenetV2/expanded_conv_7/project/Conv2D", "MobilenetV2/expanded_conv_7/project/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_7/add"], 
+            "params": {
+                "kernel_shape": [1, 1, 528, 88], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": true, 
+                "activation": "linear"
+            }
+        }, 
+        "conv17": {
+            "type": "conv", 
+            "input": ["conv16"], 
+            "output": ["dw9"], 
+            "input_shapes": [[-1, 14, 14, 88]], 
+            "output_shapes": [[-1, 14, 14, 528]], 
+            "original_names": ["MobilenetV2/expanded_conv_8/expand/Conv2D", "MobilenetV2/expanded_conv_8/expand/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_8/expand/Relu6"], 
+            "params": {
+                "kernel_shape": [1, 1, 88, 528], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "dw9": {
+            "type": "dw", 
+            "input": ["conv17"], 
+            "output": ["conv18"], 
+            "input_shapes": [[-1, 14, 14, 528]], 
+            "output_shapes": [[-1, 14, 14, 528]], 
+            "original_names": ["MobilenetV2/expanded_conv_8/depthwise/depthwise", "MobilenetV2/expanded_conv_8/depthwise/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_8/depthwise/Relu6"], 
+            "params": {
+                "kernel_shape": [3, 3, 528, 1], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "conv18": {
+            "type": "conv", 
+            "input": ["dw9", "conv16"], 
+            "output": ["conv19", "conv20"], 
+            "input_shapes": [[-1, 14, 14, 528]], 
+            "output_shapes": [[-1, 14, 14, 88]], 
+            "original_names": ["MobilenetV2/expanded_conv_8/project/Conv2D", "MobilenetV2/expanded_conv_8/project/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_8/add"], 
+            "params": {
+                "kernel_shape": [1, 1, 528, 88], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": true, 
+                "activation": "linear"
+            }
+        }, 
+        "conv19": {
+            "type": "conv", 
+            "input": ["conv18"], 
+            "output": ["dw10"], 
+            "input_shapes": [[-1, 14, 14, 88]], 
+            "output_shapes": [[-1, 14, 14, 528]], 
+            "original_names": ["MobilenetV2/expanded_conv_9/expand/Conv2D", "MobilenetV2/expanded_conv_9/expand/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_9/expand/Relu6"], 
+            "params": {
+                "kernel_shape": [1, 1, 88, 528], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "dw10": {
+            "type": "dw", 
+            "input": ["conv19"], 
+            "output": ["conv20"], 
+            "input_shapes": [[-1, 14, 14, 528]], 
+            "output_shapes": [[-1, 14, 14, 528]], 
+            "original_names": ["MobilenetV2/expanded_conv_9/depthwise/depthwise", "MobilenetV2/expanded_conv_9/depthwise/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_9/depthwise/Relu6"], 
+            "params": {
+                "kernel_shape": [3, 3, 528, 1], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "conv20": {
+            "type": "conv", 
+            "input": ["dw10", "conv18"], 
+            "output": ["conv21"], 
+            "input_shapes": [[-1, 14, 14, 528]], 
+            "output_shapes": [[-1, 14, 14, 88]], 
+            "original_names": ["MobilenetV2/expanded_conv_9/project/Conv2D", "MobilenetV2/expanded_conv_9/project/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_9/add"], 
+            "params": {
+                "kernel_shape": [1, 1, 528, 88], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": true, 
+                "activation": "linear"
+            }
+        }, 
+        "conv21": {
+            "type": "conv", 
+            "input": ["conv20"], 
+            "output": ["dw11"], 
+            "input_shapes": [[-1, 14, 14, 88]], 
+            "output_shapes": [[-1, 14, 14, 528]], 
+            "original_names": ["MobilenetV2/expanded_conv_10/expand/Conv2D", "MobilenetV2/expanded_conv_10/expand/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_10/expand/Relu6"], 
+            "params": {
+                "kernel_shape": [1, 1, 88, 528], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "dw11": {
+            "type": "dw", 
+            "input": ["conv21"], 
+            "output": ["conv22"], 
+            "input_shapes": [[-1, 14, 14, 528]], 
+            "output_shapes": [[-1, 14, 14, 528]], 
+            "original_names": ["MobilenetV2/expanded_conv_10/depthwise/depthwise", "MobilenetV2/expanded_conv_10/depthwise/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_10/depthwise/Relu6"], 
+            "params": {
+                "kernel_shape": [3, 3, 528, 1], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "conv22": {
+            "type": "conv", 
+            "input": ["dw11"], 
+            "output": ["conv23", "conv24"], 
+            "input_shapes": [[-1, 14, 14, 528]], 
+            "output_shapes": [[-1, 14, 14, 136]], 
+            "original_names": ["MobilenetV2/expanded_conv_10/project/Conv2D", "MobilenetV2/expanded_conv_10/project/BatchNorm/FusedBatchNorm"], 
+            "params": {
+                "kernel_shape": [1, 1, 528, 136], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "conv23": {
+            "type": "conv", 
+            "input": ["conv22"], 
+            "output": ["dw12"], 
+            "input_shapes": [[-1, 14, 14, 136]], 
+            "output_shapes": [[-1, 14, 14, 816]], 
+            "original_names": ["MobilenetV2/expanded_conv_11/expand/Conv2D", "MobilenetV2/expanded_conv_11/expand/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_11/expand/Relu6"], 
+            "params": {
+                "kernel_shape": [1, 1, 136, 816], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "dw12": {
+            "type": "dw", 
+            "input": ["conv23"], 
+            "output": ["conv24"], 
+            "input_shapes": [[-1, 14, 14, 816]], 
+            "output_shapes": [[-1, 14, 14, 816]], 
+            "original_names": ["MobilenetV2/expanded_conv_11/depthwise/depthwise", "MobilenetV2/expanded_conv_11/depthwise/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_11/depthwise/Relu6"], 
+            "params": {
+                "kernel_shape": [3, 3, 816, 1], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "conv24": {
+            "type": "conv", 
+            "input": ["dw12", "conv22"], 
+            "output": ["conv25", "conv26"], 
+            "input_shapes": [[-1, 14, 14, 816]], 
+            "output_shapes": [[-1, 14, 14, 136]], 
+            "original_names": ["MobilenetV2/expanded_conv_11/project/Conv2D", "MobilenetV2/expanded_conv_11/project/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_11/add"], 
+            "params": {
+                "kernel_shape": [1, 1, 816, 136], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": true, 
+                "activation": "linear"
+            }
+        }, 
+        "conv25": {
+            "type": "conv", 
+            "input": ["conv24"], 
+            "output": ["dw13"], 
+            "input_shapes": [[-1, 14, 14, 136]], 
+            "output_shapes": [[-1, 14, 14, 816]], 
+            "original_names": ["MobilenetV2/expanded_conv_12/expand/Conv2D", "MobilenetV2/expanded_conv_12/expand/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_12/expand/Relu6"], 
+            "params": {
+                "kernel_shape": [1, 1, 136, 816], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "dw13": {
+            "type": "dw", 
+            "input": ["conv25"], 
+            "output": ["conv26"], 
+            "input_shapes": [[-1, 14, 14, 816]], 
+            "output_shapes": [[-1, 14, 14, 816]], 
+            "original_names": ["MobilenetV2/expanded_conv_12/depthwise/depthwise", "MobilenetV2/expanded_conv_12/depthwise/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_12/depthwise/Relu6"], 
+            "params": {
+                "kernel_shape": [3, 3, 816, 1], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "conv26": {
+            "type": "conv", 
+            "input": ["dw13", "conv24"], 
+            "output": ["conv27"], 
+            "input_shapes": [[-1, 14, 14, 816]], 
+            "output_shapes": [[-1, 14, 14, 136]], 
+            "original_names": ["MobilenetV2/expanded_conv_12/project/Conv2D", "MobilenetV2/expanded_conv_12/project/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_12/add"], 
+            "params": {
+                "kernel_shape": [1, 1, 816, 136], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": true, 
+                "activation": "linear"
+            }
+        }, 
+        "conv27": {
+            "type": "conv", 
+            "input": ["conv26"], 
+            "output": ["dw14"], 
+            "input_shapes": [[-1, 14, 14, 136]], 
+            "output_shapes": [[-1, 14, 14, 816]], 
+            "original_names": ["MobilenetV2/expanded_conv_13/expand/Conv2D", "MobilenetV2/expanded_conv_13/expand/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_13/expand/Relu6"], 
+            "params": {
+                "kernel_shape": [1, 1, 136, 816], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "dw14": {
+            "type": "dw", 
+            "input": ["conv27"], 
+            "output": ["conv28"], 
+            "input_shapes": [[-1, 14, 14, 816]], 
+            "output_shapes": [[-1, 7, 7, 816]], 
+            "original_names": ["MobilenetV2/expanded_conv_13/depthwise/depthwise", "MobilenetV2/expanded_conv_13/depthwise/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_13/depthwise/Relu6"], 
+            "params": {
+                "kernel_shape": [3, 3, 816, 1], 
+                "strides": [1, 2, 2, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "conv28": {
+            "type": "conv", 
+            "input": ["dw14"], 
+            "output": ["conv29", "conv30"], 
+            "input_shapes": [[-1, 7, 7, 816]], 
+            "output_shapes": [[-1, 7, 7, 224]], 
+            "original_names": ["MobilenetV2/expanded_conv_13/project/Conv2D", "MobilenetV2/expanded_conv_13/project/BatchNorm/FusedBatchNorm"], 
+            "params": {
+                "kernel_shape": [1, 1, 816, 224], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "conv29": {
+            "type": "conv", 
+            "input": ["conv28"], 
+            "output": ["dw15"], 
+            "input_shapes": [[-1, 7, 7, 224]], 
+            "output_shapes": [[-1, 7, 7, 1344]], 
+            "original_names": ["MobilenetV2/expanded_conv_14/expand/Conv2D", "MobilenetV2/expanded_conv_14/expand/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_14/expand/Relu6"], 
+            "params": {
+                "kernel_shape": [1, 1, 224, 1344], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "dw15": {
+            "type": "dw", 
+            "input": ["conv29"], 
+            "output": ["conv30"], 
+            "input_shapes": [[-1, 7, 7, 1344]], 
+            "output_shapes": [[-1, 7, 7, 1344]], 
+            "original_names": ["MobilenetV2/expanded_conv_14/depthwise/depthwise", "MobilenetV2/expanded_conv_14/depthwise/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_14/depthwise/Relu6"], 
+            "params": {
+                "kernel_shape": [3, 3, 1344, 1], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "conv30": {
+            "type": "conv", 
+            "input": ["dw15", "conv28"], 
+            "output": ["conv31", "conv32"], 
+            "input_shapes": [[-1, 7, 7, 1344]], 
+            "output_shapes": [[-1, 7, 7, 224]], 
+            "original_names": ["MobilenetV2/expanded_conv_14/project/Conv2D", "MobilenetV2/expanded_conv_14/project/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_14/add"], 
+            "params": {
+                "kernel_shape": [1, 1, 1344, 224], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": true, 
+                "activation": "linear"
+            }
+        }, 
+        "conv31": {
+            "type": "conv", 
+            "input": ["conv30"], 
+            "output": ["dw16"], 
+            "input_shapes": [[-1, 7, 7, 224]], 
+            "output_shapes": [[-1, 7, 7, 1344]], 
+            "original_names": ["MobilenetV2/expanded_conv_15/expand/Conv2D", "MobilenetV2/expanded_conv_15/expand/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_15/expand/Relu6"], 
+            "params": {
+                "kernel_shape": [1, 1, 224, 1344], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "dw16": {
+            "type": "dw", 
+            "input": ["conv31"], 
+            "output": ["conv32"], 
+            "input_shapes": [[-1, 7, 7, 1344]], 
+            "output_shapes": [[-1, 7, 7, 1344]], 
+            "original_names": ["MobilenetV2/expanded_conv_15/depthwise/depthwise", "MobilenetV2/expanded_conv_15/depthwise/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_15/depthwise/Relu6"], 
+            "params": {
+                "kernel_shape": [3, 3, 1344, 1], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "conv32": {
+            "type": "conv", 
+            "input": ["dw16", "conv30"], 
+            "output": ["conv33"], 
+            "input_shapes": [[-1, 7, 7, 1344]], 
+            "output_shapes": [[-1, 7, 7, 224]], 
+            "original_names": ["MobilenetV2/expanded_conv_15/project/Conv2D", "MobilenetV2/expanded_conv_15/project/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_15/add"], 
+            "params": {
+                "kernel_shape": [1, 1, 1344, 224], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": true, 
+                "activation": "linear"
+            }
+        }, 
+        "conv33": {
+            "type": "conv", 
+            "input": ["conv32"], 
+            "output": ["dw17"], 
+            "input_shapes": [[-1, 7, 7, 224]], 
+            "output_shapes": [[-1, 7, 7, 1344]], 
+            "original_names": ["MobilenetV2/expanded_conv_16/expand/Conv2D", "MobilenetV2/expanded_conv_16/expand/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_16/expand/Relu6"], 
+            "params": {
+                "kernel_shape": [1, 1, 224, 1344], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "dw17": {
+            "type": "dw", 
+            "input": ["conv33"], 
+            "output": ["conv34"], 
+            "input_shapes": [[-1, 7, 7, 1344]], 
+            "output_shapes": [[-1, 7, 7, 1344]], 
+            "original_names": ["MobilenetV2/expanded_conv_16/depthwise/depthwise", "MobilenetV2/expanded_conv_16/depthwise/BatchNorm/FusedBatchNorm", "MobilenetV2/expanded_conv_16/depthwise/Relu6"], 
+            "params": {
+                "kernel_shape": [3, 3, 1344, 1], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "conv34": {
+            "type": "conv", 
+            "input": ["dw17"], 
+            "output": ["conv35"], 
+            "input_shapes": [[-1, 7, 7, 1344]], 
+            "output_shapes": [[-1, 7, 7, 448]], 
+            "original_names": ["MobilenetV2/expanded_conv_16/project/Conv2D", "MobilenetV2/expanded_conv_16/project/BatchNorm/FusedBatchNorm"], 
+            "params": {
+                "kernel_shape": [1, 1, 1344, 448], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "conv35": {
+            "type": "conv", 
+            "input": ["conv34"], 
+            "output": ["avgpool1"], 
+            "input_shapes": [[-1, 7, 7, 448]], 
+            "output_shapes": [[-1, 7, 7, 1792]], 
+            "original_names": ["MobilenetV2/Conv_1/Conv2D", "MobilenetV2/Conv_1/BatchNorm/FusedBatchNorm", "MobilenetV2/Conv_1/Relu6"], 
+            "params": {
+                "kernel_shape": [1, 1, 448, 1792], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu6"
+            }
+        }, 
+        "avgpool1": {
+            "type": "avgpool", 
+            "input": ["conv35"], 
+            "output": ["conv36"], 
+            "input_shapes": [[-1, 7, 7, 1792]], 
+            "output_shapes": [[-1, 1, 1, 1792]], 
+            "original_names": ["MobilenetV2/Logits/AvgPool"], 
+            "params": {
+                "kernel_shape": [1, 7, 7, 1], 
+                "strides": [1, 1, 1, 1], 
+                "padding": "VALID"
+            }
+        }, 
+        "conv36": {
+            "type": "conv", 
+            "input": ["avgpool1"], 
+            "output": ["output_layer1"], 
+            "input_shapes": [[-1, 1, 1, 1792]], 
+            "output_shapes": [[-1, 1, 1, 1001]], 
+            "original_names": ["MobilenetV2/Logits/Conv2d_1c_1x1/Conv2D", "MobilenetV2/Logits/Conv2d_1c_1x1/BiasAdd"], 
+            "params": {
+                "kernel_shape": [1, 1, 1792, 1001], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "output_layer1": {
+            "type": "output_layer", 
+            "input": ["conv36"], 
+            "output": [], 
+            "input_shapes": [[-1, 1, 1, 1001]], 
+            "output_shapes": [[-1, 1, 1, 1001]], 
+            "original_names": ["out"]
+        }
+    }
+}

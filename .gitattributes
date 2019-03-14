@@ -1,0 +1,2 @@
+nets*.npz filter=lfs diff=lfs merge=lfs -text
+nets/*.npz filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,3288 @@
+{
+    "name": "densenet121", 
+    "layers": {
+        "input_layer": {
+            "type": "input_layer", 
+            "input": [], 
+            "output": ["conv1"], 
+            "input_shapes": [[-1, 224, 224, 3]], 
+            "output_shapes": [[-1, 224, 224, 3]], 
+            "original_names": ["inputImage"]
+        }, 
+        "conv1": {
+            "type": "conv", 
+            "input": ["input_layer"], 
+            "output": ["maxpool1"], 
+            "input_shapes": [[-1, 224, 224, 3]], 
+            "output_shapes": [[-1, 112, 112, 64]], 
+            "original_names": ["densenet121/conv1/Conv2D", "densenet121/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/Relu"], 
+            "params": {
+                "kernel_shape": [7, 7, 3, 64], 
+                "strides": [1, 2, 2, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "maxpool1": {
+            "type": "maxpool", 
+            "input": ["conv1"], 
+            "output": ["batch_norm1", "concat1"], 
+            "input_shapes": [[-1, 112, 112, 64]], 
+            "output_shapes": [[-1, 56, 56, 64]], 
+            "original_names": ["densenet121/MaxPool2D/MaxPool"], 
+            "params": {
+                "kernel_shape": [1, 3, 3, 1], 
+                "strides": [1, 2, 2, 1], 
+                "padding": "SAME_TENSORFLOW"
+            }
+        }, 
+        "batch_norm1": {
+            "type": "batch_norm", 
+            "input": ["maxpool1"], 
+            "output": ["conv2"], 
+            "input_shapes": [[-1, 56, 56, 64]], 
+            "output_shapes": [[-1, 56, 56, 64]], 
+            "original_names": ["densenet121/dense_block1/conv_block1/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block1/conv_block1/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv2": {
+            "type": "conv", 
+            "input": ["batch_norm1"], 
+            "output": ["conv3"], 
+            "input_shapes": [[-1, 56, 56, 64]], 
+            "output_shapes": [[-1, 56, 56, 128]], 
+            "original_names": ["densenet121/dense_block1/conv_block1/x1/Conv/Conv2D", "densenet121/dense_block1/conv_block1/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block1/conv_block1/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 64, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv3": {
+            "type": "conv", 
+            "input": ["conv2"], 
+            "output": ["concat1"], 
+            "input_shapes": [[-1, 56, 56, 128]], 
+            "output_shapes": [[-1, 56, 56, 32]], 
+            "original_names": ["densenet121/dense_block1/conv_block1/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat1": {
+            "type": "concat", 
+            "input": ["maxpool1", "conv3"], 
+            "output": ["batch_norm2", "concat2"], 
+            "input_shapes": [[-1, 56, 56, 32]], 
+            "output_shapes": [[-1, 56, 56, 96]], 
+            "original_names": ["densenet121/dense_block1/conv_block1/concat"]
+        }, 
+        "batch_norm2": {
+            "type": "batch_norm", 
+            "input": ["concat1"], 
+            "output": ["conv4"], 
+            "input_shapes": [[-1, 56, 56, 96]], 
+            "output_shapes": [[-1, 56, 56, 96]], 
+            "original_names": ["densenet121/dense_block1/conv_block2/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block1/conv_block2/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv4": {
+            "type": "conv", 
+            "input": ["batch_norm2"], 
+            "output": ["conv5"], 
+            "input_shapes": [[-1, 56, 56, 96]], 
+            "output_shapes": [[-1, 56, 56, 128]], 
+            "original_names": ["densenet121/dense_block1/conv_block2/x1/Conv/Conv2D", "densenet121/dense_block1/conv_block2/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block1/conv_block2/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 96, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv5": {
+            "type": "conv", 
+            "input": ["conv4"], 
+            "output": ["concat2"], 
+            "input_shapes": [[-1, 56, 56, 128]], 
+            "output_shapes": [[-1, 56, 56, 32]], 
+            "original_names": ["densenet121/dense_block1/conv_block2/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat2": {
+            "type": "concat", 
+            "input": ["concat1", "conv5"], 
+            "output": ["batch_norm3", "concat3"], 
+            "input_shapes": [[-1, 56, 56, 96]], 
+            "output_shapes": [[-1, 56, 56, 128]], 
+            "original_names": ["densenet121/dense_block1/conv_block2/concat"]
+        },
+        "batch_norm3": {
+            "type": "batch_norm", 
+            "input": ["concat2"], 
+            "output": ["conv6"], 
+            "input_shapes": [[-1, 56, 56, 128]], 
+            "output_shapes": [[-1, 56, 56, 128]], 
+            "original_names": ["densenet121/dense_block1/conv_block3/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block1/conv_block3/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv6": {
+            "type": "conv", 
+            "input": ["batch_norm3"], 
+            "output": ["conv7"], 
+            "input_shapes": [[-1, 56, 56, 128]], 
+            "output_shapes": [[-1, 56, 56, 128]], 
+            "original_names": ["densenet121/dense_block1/conv_block3/x1/Conv/Conv2D", "densenet121/dense_block1/conv_block3/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block1/conv_block3/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 128, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv7": {
+            "type": "conv", 
+            "input": ["conv6"], 
+            "output": ["concat3"], 
+            "input_shapes": [[-1, 56, 56, 128]], 
+            "output_shapes": [[-1, 56, 56, 32]], 
+            "original_names": ["densenet121/dense_block1/conv_block3/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat3": {
+            "type": "concat", 
+            "input": ["concat2", "conv7"], 
+            "output": ["batch_norm4", "concat4"], 
+            "input_shapes": [[-1, 56, 56, 32]], 
+            "output_shapes": [[-1, 56, 56, 160]], 
+            "original_names": ["densenet121/dense_block1/conv_block3/concat"]
+        }, 
+        "batch_norm4": {
+            "type": "batch_norm", 
+            "input": ["concat3"], 
+            "output": ["conv8"], 
+            "input_shapes": [[-1, 56, 56, 160]], 
+            "output_shapes": [[-1, 56, 56, 160]], 
+            "original_names": ["densenet121/dense_block1/conv_block4/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block1/conv_block4/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv8": {
+            "type": "conv", 
+            "input": ["batch_norm4"], 
+            "output": ["conv9"], 
+            "input_shapes": [[-1, 56, 56, 160]], 
+            "output_shapes": [[-1, 56, 56, 128]], 
+            "original_names": ["densenet121/dense_block1/conv_block4/x1/Conv/Conv2D", "densenet121/dense_block1/conv_block4/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block1/conv_block4/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 160, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv9": {
+            "type": "conv", 
+            "input": ["conv8"], 
+            "output": ["concat4"], 
+            "input_shapes": [[-1, 56, 56, 128]], 
+            "output_shapes": [[-1, 56, 56, 32]], 
+            "original_names": ["densenet121/dense_block1/conv_block4/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat4": {
+            "type": "concat", 
+            "input": ["concat3", "conv9"], 
+            "output": ["batch_norm5", "concat5"], 
+            "input_shapes": [[-1, 56, 56, 32]], 
+            "output_shapes": [[-1, 56, 56, 192]], 
+            "original_names": ["densenet121/dense_block1/conv_block4/concat"]
+        }, 
+        "batch_norm5": {
+            "type": "batch_norm", 
+            "input": ["concat4"], 
+            "output": ["conv10"], 
+            "input_shapes": [[-1, 56, 56, 192]], 
+            "output_shapes": [[-1, 56, 56, 192]], 
+            "original_names": ["densenet121/dense_block1/conv_block5/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block1/conv_block5/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv10": {
+            "type": "conv", 
+            "input": ["batch_norm5"], 
+            "output": ["conv11"], 
+            "input_shapes": [[-1, 56, 56, 192]], 
+            "output_shapes": [[-1, 56, 56, 128]], 
+            "original_names": ["densenet121/dense_block1/conv_block5/x1/Conv/Conv2D", "densenet121/dense_block1/conv_block5/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block1/conv_block5/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 192, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv11": {
+            "type": "conv", 
+            "input": ["conv10"], 
+            "output": ["concat5"], 
+            "input_shapes": [[-1, 56, 56, 128]], 
+            "output_shapes": [[-1, 56, 56, 32]], 
+            "original_names": ["densenet121/dense_block1/conv_block5/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat5": {
+            "type": "concat", 
+            "input": ["concat4", "conv11"], 
+            "output": ["batch_norm6", "concat6"], 
+            "input_shapes": [[-1, 56, 56, 32]], 
+            "output_shapes": [[-1, 56, 56, 224]], 
+            "original_names": ["densenet121/dense_block1/conv_block5/concat"]
+        }, 
+        "batch_norm6": {
+            "type": "batch_norm", 
+            "input": ["concat5"], 
+            "output": ["conv12"], 
+            "input_shapes": [[-1, 56, 56, 224]], 
+            "output_shapes": [[-1, 56, 56, 224]], 
+            "original_names": ["densenet121/dense_block1/conv_block6/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block1/conv_block6/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv12": {
+            "type": "conv", 
+            "input": ["batch_norm6"], 
+            "output": ["conv13"], 
+            "input_shapes": [[-1, 56, 56, 224]], 
+            "output_shapes": [[-1, 56, 56, 128]], 
+            "original_names": ["densenet121/dense_block1/conv_block6/x1/Conv/Conv2D", "densenet121/dense_block1/conv_block6/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block1/conv_block6/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 224, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv13": {
+            "type": "conv", 
+            "input": ["conv12"], 
+            "output": ["concat6"], 
+            "input_shapes": [[-1, 56, 56, 128]], 
+            "output_shapes": [[-1, 56, 56, 32]], 
+            "original_names": ["densenet121/dense_block1/conv_block6/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat6": {
+            "type": "concat", 
+            "input": ["concat5", "conv13"], 
+            "output": ["batch_norm7"], 
+            "input_shapes": [[-1, 56, 56, 224]], 
+            "output_shapes": [[-1, 56, 56, 256]], 
+            "original_names": ["densenet121/dense_block1/conv_block6/concat"]
+        }, 
+        "batch_norm7": {
+            "type": "batch_norm", 
+            "input": ["concat6"], 
+            "output": ["conv14"], 
+            "input_shapes": [[-1, 56, 56, 256]], 
+            "output_shapes": [[-1, 56, 56, 256]], 
+            "original_names": ["densenet121/transition_block1/blk/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/transition_block1/blk/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv14": {
+            "type": "conv", 
+            "input": ["batch_norm7"], 
+            "output": ["avgpool1"], 
+            "input_shapes": [[-1, 56, 56, 256]], 
+            "output_shapes": [[-1, 56, 56, 128]], 
+            "original_names": ["densenet121/transition_block1/blk/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [1, 1, 256, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "avgpool1": {
+            "type": "avgpool", 
+            "input": ["conv14"], 
+            "output": ["batch_norm8", "concat7"], 
+            "input_shapes": [[-1, 56, 56, 128]], 
+            "output_shapes": [[-1, 28, 28, 128]], 
+            "original_names": ["densenet121/transition_block1/AvgPool2D/AvgPool"], 
+            "params": {
+                "kernel_shape": [1, 2, 2, 1], 
+                "strides": [1, 2, 2, 1], 
+                "padding": "VALID"
+            }
+        }, 
+        "batch_norm8": {
+            "type": "batch_norm", 
+            "input": ["avgpool1"], 
+            "output": ["conv15"], 
+            "input_shapes": [[-1, 28, 28, 128]], 
+            "output_shapes": [[-1, 28, 28, 128]], 
+            "original_names": ["densenet121/dense_block2/conv_block1/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block1/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv15": {
+            "type": "conv", 
+            "input": ["batch_norm8"], 
+            "output": ["conv16"], 
+            "input_shapes": [[-1, 28, 28, 128]], 
+            "output_shapes": [[-1, 28, 28, 128]], 
+            "original_names": ["densenet121/dense_block2/conv_block1/x1/Conv/Conv2D", "densenet121/dense_block2/conv_block1/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block1/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 128, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv16": {
+            "type": "conv", 
+            "input": ["conv15"], 
+            "output": ["concat7"], 
+            "input_shapes": [[-1, 28, 28, 128]], 
+            "output_shapes": [[-1, 28, 28, 32]], 
+            "original_names": ["densenet121/dense_block2/conv_block1/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat7": {
+            "type": "concat", 
+            "input": ["avgpool1", "conv16"], 
+            "output": ["batch_norm9", "concat8"], 
+            "input_shapes": [[-1, 28, 28, 32]], 
+            "output_shapes": [[-1, 28, 28, 160]], 
+            "original_names": ["densenet121/dense_block2/conv_block1/concat"]
+        }, 
+        "batch_norm9": {
+            "type": "batch_norm", 
+            "input": ["concat7"], 
+            "output": ["conv17"], 
+            "input_shapes": [[-1, 28, 28, 160]], 
+            "output_shapes": [[-1, 28, 28, 160]], 
+            "original_names": ["densenet121/dense_block2/conv_block2/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block2/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv17": {
+            "type": "conv", 
+            "input": ["batch_norm9"], 
+            "output": ["conv18"], 
+            "input_shapes": [[-1, 28, 28, 160]], 
+            "output_shapes": [[-1, 28, 28, 128]], 
+            "original_names": ["densenet121/dense_block2/conv_block2/x1/Conv/Conv2D", "densenet121/dense_block2/conv_block2/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block2/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 160, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv18": {
+            "type": "conv", 
+            "input": ["conv17"], 
+            "output": ["concat8"], 
+            "input_shapes": [[-1, 28, 28, 128]], 
+            "output_shapes": [[-1, 28, 28, 32]], 
+            "original_names": ["densenet121/dense_block2/conv_block2/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat8": {
+            "type": "concat", 
+            "input": ["concat7", "conv18"], 
+            "output": ["batch_norm10", "concat9"], 
+            "input_shapes": [[-1, 28, 28, 160]], 
+            "output_shapes": [[-1, 28, 28, 192]], 
+            "original_names": ["densenet121/dense_block2/conv_block2/concat"]
+        }, 
+        "batch_norm10": {
+            "type": "batch_norm", 
+            "input": ["concat8"], 
+            "output": ["conv19"], 
+            "input_shapes": [[-1, 28, 28, 192]], 
+            "output_shapes": [[-1, 28, 28, 192]], 
+            "original_names": ["densenet121/dense_block2/conv_block3/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block3/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv19": {
+            "type": "conv", 
+            "input": ["batch_norm10"], 
+            "output": ["conv20"], 
+            "input_shapes": [[-1, 28, 28, 192]], 
+            "output_shapes": [[-1, 28, 28, 128]], 
+            "original_names": ["densenet121/dense_block2/conv_block3/x1/Conv/Conv2D", "densenet121/dense_block2/conv_block3/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block3/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 192, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv20": {
+            "type": "conv", 
+            "input": ["conv19"], 
+            "output": ["concat9"], 
+            "input_shapes": [[-1, 28, 28, 128]], 
+            "output_shapes": [[-1, 28, 28, 32]], 
+            "original_names": ["densenet121/dense_block2/conv_block3/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat9": {
+            "type": "concat", 
+            "input": ["concat8", "conv20"], 
+            "output": ["batch_norm11", "concat10"], 
+            "input_shapes": [[-1, 28, 28, 192]], 
+            "output_shapes": [[-1, 28, 28, 224]], 
+            "original_names": ["densenet121/dense_block2/conv_block3/concat"]
+        }, 
+        "batch_norm11": {
+            "type": "batch_norm", 
+            "input": ["concat9"], 
+            "output": ["conv21"], 
+            "input_shapes": [[-1, 28, 28, 224]], 
+            "output_shapes": [[-1, 28, 28, 224]], 
+            "original_names": ["densenet121/dense_block2/conv_block4/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block4/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv21": {
+            "type": "conv", 
+            "input": ["batch_norm11"], 
+            "output": ["conv22"], 
+            "input_shapes": [[-1, 28, 28, 224]], 
+            "output_shapes": [[-1, 28, 28, 128]], 
+            "original_names": ["densenet121/dense_block2/conv_block4/x1/Conv/Conv2D", "densenet121/dense_block2/conv_block4/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block4/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 224, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv22": {
+            "type": "conv", 
+            "input": ["conv21"], 
+            "output": ["concat10"], 
+            "input_shapes": [[-1, 28, 28, 128]], 
+            "output_shapes": [[-1, 28, 28, 32]], 
+            "original_names": ["densenet121/dense_block2/conv_block4/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat10": {
+            "type": "concat", 
+            "input": ["concat9", "conv22"], 
+            "output": ["batch_norm12", "concat11"], 
+            "input_shapes": [[-1, 28, 28, 224]], 
+            "output_shapes": [[-1, 28, 28, 256]], 
+            "original_names": ["densenet121/dense_block2/conv_block4/concat"]
+        }, 
+        "batch_norm12": {
+            "type": "batch_norm", 
+            "input": ["concat10"], 
+            "output": ["conv23"], 
+            "input_shapes": [[-1, 28, 28, 256]], 
+            "output_shapes": [[-1, 28, 28, 256]], 
+            "original_names": ["densenet121/dense_block2/conv_block5/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block5/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv23": {
+            "type": "conv", 
+            "input": ["batch_norm12"], 
+            "output": ["conv24"], 
+            "input_shapes": [[-1, 28, 28, 256]], 
+            "output_shapes": [[-1, 28, 28, 128]], 
+            "original_names": ["densenet121/dense_block2/conv_block5/x1/Conv/Conv2D", "densenet121/dense_block2/conv_block5/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block5/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 256, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv24": {
+            "type": "conv", 
+            "input": ["conv23"], 
+            "output": ["concat11"], 
+            "input_shapes": [[-1, 28, 28, 128]], 
+            "output_shapes": [[-1, 28, 28, 32]], 
+            "original_names": ["densenet121/dense_block2/conv_block5/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat11": {
+            "type": "concat", 
+            "input": ["concat10", "conv24"], 
+            "output": ["batch_norm13", "concat12"], 
+            "input_shapes": [[-1, 28, 28, 256]], 
+            "output_shapes": [[-1, 28, 28, 288]], 
+            "original_names": ["densenet121/dense_block2/conv_block5/concat"]
+        }, 
+        "batch_norm13": {
+            "type": "batch_norm", 
+            "input": ["concat11"], 
+            "output": ["conv25"], 
+            "input_shapes": [[-1, 28, 28, 288]], 
+            "output_shapes": [[-1, 28, 28, 288]], 
+            "original_names": ["densenet121/dense_block2/conv_block6/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block6/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv25": {
+            "type": "conv", 
+            "input": ["batch_norm13"], 
+            "output": ["conv26"], 
+            "input_shapes": [[-1, 28, 28, 288]], 
+            "output_shapes": [[-1, 28, 28, 128]], 
+            "original_names": ["densenet121/dense_block2/conv_block6/x1/Conv/Conv2D", "densenet121/dense_block2/conv_block6/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block6/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 288, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv26": {
+            "type": "conv", 
+            "input": ["conv25"], 
+            "output": ["concat12"], 
+            "input_shapes": [[-1, 28, 28, 128]], 
+            "output_shapes": [[-1, 28, 28, 32]], 
+            "original_names": ["densenet121/dense_block2/conv_block6/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat12": {
+            "type": "concat", 
+            "input": ["concat11", "conv26"], 
+            "output": ["batch_norm14", "concat13"], 
+            "input_shapes": [[-1, 28, 28, 288]], 
+            "output_shapes": [[-1, 28, 28, 320]], 
+            "original_names": ["densenet121/dense_block2/conv_block6/concat"]
+        }, 
+        "batch_norm14": {
+            "type": "batch_norm", 
+            "input": ["concat12"], 
+            "output": ["conv27"], 
+            "input_shapes": [[-1, 28, 28, 320]], 
+            "output_shapes": [[-1, 28, 28, 320]], 
+            "original_names": ["densenet121/dense_block2/conv_block7/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block7/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv27": {
+            "type": "conv", 
+            "input": ["batch_norm14"], 
+            "output": ["conv28"], 
+            "input_shapes": [[-1, 28, 28, 320]], 
+            "output_shapes": [[-1, 28, 28, 128]], 
+            "original_names": ["densenet121/dense_block2/conv_block7/x1/Conv/Conv2D", "densenet121/dense_block2/conv_block7/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block7/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 320, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv28": {
+            "type": "conv", 
+            "input": ["conv27"], 
+            "output": ["concat13"], 
+            "input_shapes": [[-1, 28, 28, 128]], 
+            "output_shapes": [[-1, 28, 28, 32]], 
+            "original_names": ["densenet121/dense_block2/conv_block7/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat13": {
+            "type": "concat", 
+            "input": ["concat12", "conv28"], 
+            "output": ["batch_norm15", "concat14"], 
+            "input_shapes": [[-1, 28, 28, 32]], 
+            "output_shapes": [[-1, 28, 28, 352]], 
+            "original_names": ["densenet121/dense_block2/conv_block7/concat"]
+        }, 
+        "batch_norm15": {
+            "type": "batch_norm", 
+            "input": ["concat13"], 
+            "output": ["conv29"], 
+            "input_shapes": [[-1, 28, 28, 352]], 
+            "output_shapes": [[-1, 28, 28, 352]], 
+            "original_names": ["densenet121/dense_block2/conv_block8/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block8/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv29": {
+            "type": "conv", 
+            "input": ["batch_norm15"], 
+            "output": ["conv30"], 
+            "input_shapes": [[-1, 28, 28, 352]], 
+            "output_shapes": [[-1, 28, 28, 128]], 
+            "original_names": ["densenet121/dense_block2/conv_block8/x1/Conv/Conv2D", "densenet121/dense_block2/conv_block8/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block8/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 352, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv30": {
+            "type": "conv", 
+            "input": ["conv29"], 
+            "output": ["concat14"], 
+            "input_shapes": [[-1, 28, 28, 128]], 
+            "output_shapes": [[-1, 28, 28, 32]], 
+            "original_names": ["densenet121/dense_block2/conv_block8/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat14": {
+            "type": "concat", 
+            "input": ["concat13", "conv30"], 
+            "output": ["batch_norm16", "concat15"], 
+            "input_shapes": [[-1, 28, 28, 32]], 
+            "output_shapes": [[-1, 28, 28, 384]], 
+            "original_names": ["densenet121/dense_block2/conv_block8/concat"]
+        }, 
+        "batch_norm16": {
+            "type": "batch_norm", 
+            "input": ["concat14"], 
+            "output": ["conv31"], 
+            "input_shapes": [[-1, 28, 28, 384]], 
+            "output_shapes": [[-1, 28, 28, 384]], 
+            "original_names": ["densenet121/dense_block2/conv_block9/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block9/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv31": {
+            "type": "conv", 
+            "input": ["batch_norm16"], 
+            "output": ["conv32"], 
+            "input_shapes": [[-1, 28, 28, 384]], 
+            "output_shapes": [[-1, 28, 28, 128]], 
+            "original_names": ["densenet121/dense_block2/conv_block9/x1/Conv/Conv2D", "densenet121/dense_block2/conv_block9/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block9/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 384, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv32": {
+            "type": "conv", 
+            "input": ["conv31"], 
+            "output": ["concat15"], 
+            "input_shapes": [[-1, 28, 28, 128]], 
+            "output_shapes": [[-1, 28, 28, 32]], 
+            "original_names": ["densenet121/dense_block2/conv_block9/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat15": {
+            "type": "concat", 
+            "input": ["concat14", "conv32"], 
+            "output": ["batch_norm17", "concat16"], 
+            "input_shapes": [[-1, 28, 28, 32]], 
+            "output_shapes": [[-1, 28, 28, 416]], 
+            "original_names": ["densenet121/dense_block2/conv_block9/concat"]
+        }, 
+        "batch_norm17": {
+            "type": "batch_norm", 
+            "input": ["concat15"], 
+            "output": ["conv33"], 
+            "input_shapes": [[-1, 28, 28, 416]], 
+            "output_shapes": [[-1, 28, 28, 416]], 
+            "original_names": ["densenet121/dense_block2/conv_block10/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block10/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv33": {
+            "type": "conv", 
+            "input": ["batch_norm17"], 
+            "output": ["conv34"], 
+            "input_shapes": [[-1, 28, 28, 416]], 
+            "output_shapes": [[-1, 28, 28, 128]], 
+            "original_names": ["densenet121/dense_block2/conv_block10/x1/Conv/Conv2D", "densenet121/dense_block2/conv_block10/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block10/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 416, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv34": {
+            "type": "conv", 
+            "input": ["conv33"], 
+            "output": ["concat16"], 
+            "input_shapes": [[-1, 28, 28, 128]], 
+            "output_shapes": [[-1, 28, 28, 32]], 
+            "original_names": ["densenet121/dense_block2/conv_block10/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat16": {
+            "type": "concat", 
+            "input": ["concat15", "conv34"], 
+            "output": ["batch_norm18", "concat17"], 
+            "input_shapes": [[-1, 28, 28, 416]], 
+            "output_shapes": [[-1, 28, 28, 448]], 
+            "original_names": ["densenet121/dense_block2/conv_block10/concat"]
+        }, 
+        "batch_norm18": {
+            "type": "batch_norm", 
+            "input": ["concat16"], 
+            "output": ["conv35"], 
+            "input_shapes": [[-1, 28, 28, 448]], 
+            "output_shapes": [[-1, 28, 28, 448]], 
+            "original_names": ["densenet121/dense_block2/conv_block11/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block11/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv35": {
+            "type": "conv", 
+            "input": ["batch_norm18"], 
+            "output": ["conv36"], 
+            "input_shapes": [[-1, 28, 28, 448]], 
+            "output_shapes": [[-1, 28, 28, 128]], 
+            "original_names": ["densenet121/dense_block2/conv_block11/x1/Conv/Conv2D", "densenet121/dense_block2/conv_block11/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block11/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 448, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv36": {
+            "type": "conv", 
+            "input": ["conv35"], 
+            "output": ["concat17"], 
+            "input_shapes": [[-1, 28, 28, 128]], 
+            "output_shapes": [[-1, 28, 28, 32]], 
+            "original_names": ["densenet121/dense_block2/conv_block11/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat17": {
+            "type": "concat", 
+            "input": ["concat16", "conv36"], 
+            "output": ["batch_norm19", "concat18"], 
+            "input_shapes": [[-1, 28, 28, 448]], 
+            "output_shapes": [[-1, 28, 28, 480]], 
+            "original_names": ["densenet121/dense_block2/conv_block11/concat"]
+        }, 
+        "batch_norm19": {
+            "type": "batch_norm", 
+            "input": ["concat17"], 
+            "output": ["conv37"], 
+            "input_shapes": [[-1, 28, 28, 480]], 
+            "output_shapes": [[-1, 28, 28, 480]], 
+            "original_names": ["densenet121/dense_block2/conv_block12/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block12/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv37": {
+            "type": "conv", 
+            "input": ["batch_norm19"], 
+            "output": ["conv38"], 
+            "input_shapes": [[-1, 28, 28, 480]], 
+            "output_shapes": [[-1, 28, 28, 128]], 
+            "original_names": ["densenet121/dense_block2/conv_block12/x1/Conv/Conv2D", "densenet121/dense_block2/conv_block12/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block2/conv_block12/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 480, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv38": {
+            "type": "conv", 
+            "input": ["conv37"], 
+            "output": ["concat18"], 
+            "input_shapes": [[-1, 28, 28, 128]], 
+            "output_shapes": [[-1, 28, 28, 32]], 
+            "original_names": ["densenet121/dense_block2/conv_block12/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat18": {
+            "type": "concat", 
+            "input": ["concat17", "conv38"], 
+            "output": ["batch_norm20"], 
+            "input_shapes": [[-1, 28, 28, 480]], 
+            "output_shapes": [[-1, 28, 28, 512]], 
+            "original_names": ["densenet121/dense_block2/conv_block12/concat"]
+        }, 
+        "batch_norm20": {
+            "type": "batch_norm", 
+            "input": ["concat18"], 
+            "output": ["conv39"], 
+            "input_shapes": [[-1, 28, 28, 512]], 
+            "output_shapes": [[-1, 28, 28, 512]], 
+            "original_names": ["densenet121/transition_block2/blk/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/transition_block2/blk/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv39": {
+            "type": "conv", 
+            "input": ["batch_norm20"], 
+            "output": ["avgpool2"], 
+            "input_shapes": [[-1, 28, 28, 512]], 
+            "output_shapes": [[-1, 28, 28, 256]], 
+            "original_names": ["densenet121/transition_block2/blk/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [1, 1, 512, 256], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "avgpool2": {
+            "type": "avgpool", 
+            "input": ["conv39"], 
+            "output": ["batch_norm21", "concat19"], 
+            "input_shapes": [[-1, 28, 28, 256]], 
+            "output_shapes": [[-1, 14, 14, 256]], 
+            "original_names": ["densenet121/transition_block2/AvgPool2D/AvgPool"], 
+            "params": {
+                "kernel_shape": [1, 2, 2, 1], 
+                "strides": [1, 2, 2, 1], 
+                "padding": "VALID"
+            }
+        }, 
+        "batch_norm21": {
+            "type": "batch_norm", 
+            "input": ["avgpool2"], 
+            "output": ["conv40"], 
+            "input_shapes": [[-1, 14, 14, 256]], 
+            "output_shapes": [[-1, 14, 14, 256]], 
+            "original_names": ["densenet121/dense_block3/conv_block1/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block1/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv40": {
+            "type": "conv", 
+            "input": ["batch_norm21"], 
+            "output": ["conv41"], 
+            "input_shapes": [[-1, 14, 14, 256]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block1/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block1/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block1/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 256, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv41": {
+            "type": "conv", 
+            "input": ["conv40"], 
+            "output": ["concat19"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block1/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat19": {
+            "type": "concat", 
+            "input": ["avgpool2", "conv41"], 
+            "output": ["batch_norm22", "concat20"], 
+            "input_shapes": [[-1, 14, 14, 256]], 
+            "output_shapes": [[-1, 14, 14, 288]], 
+            "original_names": ["densenet121/dense_block3/conv_block1/concat"]
+        }, 
+        "batch_norm22": {
+            "type": "batch_norm", 
+            "input": ["concat19"], 
+            "output": ["conv42"], 
+            "input_shapes": [[-1, 14, 14, 288]], 
+            "output_shapes": [[-1, 14, 14, 288]], 
+            "original_names": ["densenet121/dense_block3/conv_block2/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block2/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv42": {
+            "type": "conv", 
+            "input": ["batch_norm22"], 
+            "output": ["conv43"], 
+            "input_shapes": [[-1, 14, 14, 288]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block2/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block2/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block2/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 288, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv43": {
+            "type": "conv", 
+            "input": ["conv42"], 
+            "output": ["concat20"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block2/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat20": {
+            "type": "concat", 
+            "input": ["concat19", "conv43"], 
+            "output": ["batch_norm23", "concat21"], 
+            "input_shapes": [[-1, 14, 14, 288]], 
+            "output_shapes": [[-1, 14, 14, 320]], 
+            "original_names": ["densenet121/dense_block3/conv_block2/concat"]
+        }, 
+        "batch_norm23": {
+            "type": "batch_norm", 
+            "input": ["concat20"], 
+            "output": ["conv44"], 
+            "input_shapes": [[-1, 14, 14, 320]], 
+            "output_shapes": [[-1, 14, 14, 320]], 
+            "original_names": ["densenet121/dense_block3/conv_block3/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block3/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv44": {
+            "type": "conv", 
+            "input": ["batch_norm23"], 
+            "output": ["conv45"], 
+            "input_shapes": [[-1, 14, 14, 320]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block3/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block3/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block3/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 320, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv45": {
+            "type": "conv", 
+            "input": ["conv44"], 
+            "output": ["concat21"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block3/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat21": {
+            "type": "concat", 
+            "input": ["concat20", "conv45"], 
+            "output": ["batch_norm24", "concat22"], 
+            "input_shapes": [[-1, 14, 14, 320]], 
+            "output_shapes": [[-1, 14, 14, 352]], 
+            "original_names": ["densenet121/dense_block3/conv_block3/concat"]
+        }, 
+        "batch_norm24": {
+            "type": "batch_norm", 
+            "input": ["concat21"], 
+            "output": ["conv46"], 
+            "input_shapes": [[-1, 14, 14, 352]], 
+            "output_shapes": [[-1, 14, 14, 352]], 
+            "original_names": ["densenet121/dense_block3/conv_block4/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block4/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv46": {
+            "type": "conv", 
+            "input": ["batch_norm24"], 
+            "output": ["conv47"], 
+            "input_shapes": [[-1, 14, 14, 352]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block4/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block4/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block4/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 352, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv47": {
+            "type": "conv", 
+            "input": ["conv46"], 
+            "output": ["concat22"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block4/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat22": {
+            "type": "concat", 
+            "input": ["concat21", "conv47"], 
+            "output": ["batch_norm25", "concat23"], 
+            "input_shapes": [[-1, 14, 14, 32]], 
+            "output_shapes": [[-1, 14, 14, 384]], 
+            "original_names": ["densenet121/dense_block3/conv_block4/concat"]
+        }, 
+        "batch_norm25": {
+            "type": "batch_norm", 
+            "input": ["concat22"], 
+            "output": ["conv48"], 
+            "input_shapes": [[-1, 14, 14, 384]], 
+            "output_shapes": [[-1, 14, 14, 384]], 
+            "original_names": ["densenet121/dense_block3/conv_block5/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block5/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv48": {
+            "type": "conv", 
+            "input": ["batch_norm25"], 
+            "output": ["conv49"], 
+            "input_shapes": [[-1, 14, 14, 384]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block5/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block5/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block5/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 384, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv49": {
+            "type": "conv", 
+            "input": ["conv48"], 
+            "output": ["concat23"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block5/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat23": {
+            "type": "concat", 
+            "input": ["concat22", "conv49"], 
+            "output": ["batch_norm26", "concat24"], 
+            "input_shapes": [[-1, 14, 14, 384]], 
+            "output_shapes": [[-1, 14, 14, 416]], 
+            "original_names": ["densenet121/dense_block3/conv_block5/concat"]
+        }, 
+        "batch_norm26": {
+            "type": "batch_norm", 
+            "input": ["concat23"], 
+            "output": ["conv50"], 
+            "input_shapes": [[-1, 14, 14, 416]], 
+            "output_shapes": [[-1, 14, 14, 416]], 
+            "original_names": ["densenet121/dense_block3/conv_block6/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block6/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv50": {
+            "type": "conv", 
+            "input": ["batch_norm26"], 
+            "output": ["conv51"], 
+            "input_shapes": [[-1, 14, 14, 416]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block6/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block6/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block6/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 416, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv51": {
+            "type": "conv", 
+            "input": ["conv50"], 
+            "output": ["concat24"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block6/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat24": {
+            "type": "concat", 
+            "input": ["concat23", "conv51"], 
+            "output": ["batch_norm27", "concat25"], 
+            "input_shapes": [[-1, 14, 14, 416]], 
+            "output_shapes": [[-1, 14, 14, 448]], 
+            "original_names": ["densenet121/dense_block3/conv_block6/concat"]
+        }, 
+        "batch_norm27": {
+            "type": "batch_norm", 
+            "input": ["concat24"], 
+            "output": ["conv52"], 
+            "input_shapes": [[-1, 14, 14, 448]], 
+            "output_shapes": [[-1, 14, 14, 448]], 
+            "original_names": ["densenet121/dense_block3/conv_block7/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block7/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv52": {
+            "type": "conv", 
+            "input": ["batch_norm27"], 
+            "output": ["conv53"], 
+            "input_shapes": [[-1, 14, 14, 448]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block7/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block7/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block7/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 448, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv53": {
+            "type": "conv", 
+            "input": ["conv52"], 
+            "output": ["concat25"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block7/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat25": {
+            "type": "concat", 
+            "input": ["concat24", "conv53"], 
+            "output": ["batch_norm28", "concat26"], 
+            "input_shapes": [[-1, 14, 14, 32]], 
+            "output_shapes": [[-1, 14, 14, 480]], 
+            "original_names": ["densenet121/dense_block3/conv_block7/concat"]
+        }, 
+        "batch_norm28": {
+            "type": "batch_norm", 
+            "input": ["concat25"], 
+            "output": ["conv54"], 
+            "input_shapes": [[-1, 14, 14, 480]], 
+            "output_shapes": [[-1, 14, 14, 480]], 
+            "original_names": ["densenet121/dense_block3/conv_block8/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block8/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv54": {
+            "type": "conv", 
+            "input": ["batch_norm28"], 
+            "output": ["conv55"], 
+            "input_shapes": [[-1, 14, 14, 480]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block8/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block8/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block8/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 480, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv55": {
+            "type": "conv", 
+            "input": ["conv54"], 
+            "output": ["concat26"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block8/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat26": {
+            "type": "concat", 
+            "input": ["concat25", "conv55"], 
+            "output": ["batch_norm29", "concat27"], 
+            "input_shapes": [[-1, 14, 14, 32]], 
+            "output_shapes": [[-1, 14, 14, 512]], 
+            "original_names": ["densenet121/dense_block3/conv_block8/concat"]
+        }, 
+        "batch_norm29": {
+            "type": "batch_norm", 
+            "input": ["concat26"], 
+            "output": ["conv56"], 
+            "input_shapes": [[-1, 14, 14, 512]], 
+            "output_shapes": [[-1, 14, 14, 512]], 
+            "original_names": ["densenet121/dense_block3/conv_block9/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block9/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv56": {
+            "type": "conv", 
+            "input": ["batch_norm29"], 
+            "output": ["conv57"], 
+            "input_shapes": [[-1, 14, 14, 512]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block9/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block9/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block9/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 512, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv57": {
+            "type": "conv", 
+            "input": ["conv56"], 
+            "output": ["concat27"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block9/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat27": {
+            "type": "concat", 
+            "input": ["concat26", "conv57"], 
+            "output": ["batch_norm30", "concat28"], 
+            "input_shapes": [[-1, 14, 14, 512]], 
+            "output_shapes": [[-1, 14, 14, 544]], 
+            "original_names": ["densenet121/dense_block3/conv_block9/concat"]
+        }, 
+        "batch_norm30": {
+            "type": "batch_norm", 
+            "input": ["concat27"], 
+            "output": ["conv58"], 
+            "input_shapes": [[-1, 14, 14, 544]], 
+            "output_shapes": [[-1, 14, 14, 544]], 
+            "original_names": ["densenet121/dense_block3/conv_block10/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block10/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv58": {
+            "type": "conv", 
+            "input": ["batch_norm30"], 
+            "output": ["conv59"], 
+            "input_shapes": [[-1, 14, 14, 544]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block10/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block10/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block10/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 544, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv59": {
+            "type": "conv", 
+            "input": ["conv58"], 
+            "output": ["concat28"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block10/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat28": {
+            "type": "concat", 
+            "input": ["concat27", "conv59"], 
+            "output": ["batch_norm31", "concat29"], 
+            "input_shapes": [[-1, 14, 14, 544]], 
+            "output_shapes": [[-1, 14, 14, 576]], 
+            "original_names": ["densenet121/dense_block3/conv_block10/concat"]
+        }, 
+        "batch_norm31": {
+            "type": "batch_norm", 
+            "input": ["concat28"], 
+            "output": ["conv60"], 
+            "input_shapes": [[-1, 14, 14, 576]], 
+            "output_shapes": [[-1, 14, 14, 576]], 
+            "original_names": ["densenet121/dense_block3/conv_block11/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block11/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv60": {
+            "type": "conv", 
+            "input": ["batch_norm31"], 
+            "output": ["conv61"], 
+            "input_shapes": [[-1, 14, 14, 576]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block11/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block11/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block11/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 576, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv61": {
+            "type": "conv", 
+            "input": ["conv60"], 
+            "output": ["concat29"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block11/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat29": {
+            "type": "concat", 
+            "input": ["concat28", "conv61"], 
+            "output": ["batch_norm32", "concat30"], 
+            "input_shapes": [[-1, 14, 14, 576]], 
+            "output_shapes": [[-1, 14, 14, 608]], 
+            "original_names": ["densenet121/dense_block3/conv_block11/concat"]
+        }, 
+        "batch_norm32": {
+            "type": "batch_norm", 
+            "input": ["concat29"], 
+            "output": ["conv62"], 
+            "input_shapes": [[-1, 14, 14, 608]], 
+            "output_shapes": [[-1, 14, 14, 608]], 
+            "original_names": ["densenet121/dense_block3/conv_block12/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block12/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv62": {
+            "type": "conv", 
+            "input": ["batch_norm32"], 
+            "output": ["conv63"], 
+            "input_shapes": [[-1, 14, 14, 608]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block12/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block12/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block12/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 608, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv63": {
+            "type": "conv", 
+            "input": ["conv62"], 
+            "output": ["concat30"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block12/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat30": {
+            "type": "concat", 
+            "input": ["concat29", "conv63"], 
+            "output": ["batch_norm33", "concat31"], 
+            "input_shapes": [[-1, 14, 14, 32]], 
+            "output_shapes": [[-1, 14, 14, 640]], 
+            "original_names": ["densenet121/dense_block3/conv_block12/concat"]
+        }, 
+        "batch_norm33": {
+            "type": "batch_norm", 
+            "input": ["concat30"], 
+            "output": ["conv64"], 
+            "input_shapes": [[-1, 14, 14, 640]], 
+            "output_shapes": [[-1, 14, 14, 640]], 
+            "original_names": ["densenet121/dense_block3/conv_block13/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block13/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv64": {
+            "type": "conv", 
+            "input": ["batch_norm33"], 
+            "output": ["conv65"], 
+            "input_shapes": [[-1, 14, 14, 640]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block13/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block13/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block13/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 640, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv65": {
+            "type": "conv", 
+            "input": ["conv64"], 
+            "output": ["concat31"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block13/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat31": {
+            "type": "concat", 
+            "input": ["concat30", "conv65"], 
+            "output": ["batch_norm34", "concat32"], 
+            "input_shapes": [[-1, 14, 14, 640]], 
+            "output_shapes": [[-1, 14, 14, 672]], 
+            "original_names": ["densenet121/dense_block3/conv_block13/concat"]
+        }, 
+        "batch_norm34": {
+            "type": "batch_norm", 
+            "input": ["concat31"], 
+            "output": ["conv66"], 
+            "input_shapes": [[-1, 14, 14, 672]], 
+            "output_shapes": [[-1, 14, 14, 672]], 
+            "original_names": ["densenet121/dense_block3/conv_block14/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block14/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv66": {
+            "type": "conv", 
+            "input": ["batch_norm34"], 
+            "output": ["conv67"], 
+            "input_shapes": [[-1, 14, 14, 672]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block14/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block14/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block14/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 672, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv67": {
+            "type": "conv", 
+            "input": ["conv66"], 
+            "output": ["concat32"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block14/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat32": {
+            "type": "concat", 
+            "input": ["concat31", "conv67"], 
+            "output": ["batch_norm35", "concat33"], 
+            "input_shapes": [[-1, 14, 14, 672]], 
+            "output_shapes": [[-1, 14, 14, 704]], 
+            "original_names": ["densenet121/dense_block3/conv_block14/concat"]
+        }, 
+        "batch_norm35": {
+            "type": "batch_norm", 
+            "input": ["concat32"], 
+            "output": ["conv68"], 
+            "input_shapes": [[-1, 14, 14, 704]], 
+            "output_shapes": [[-1, 14, 14, 704]], 
+            "original_names": ["densenet121/dense_block3/conv_block15/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block15/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv68": {
+            "type": "conv", 
+            "input": ["batch_norm35"], 
+            "output": ["conv69"], 
+            "input_shapes": [[-1, 14, 14, 704]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block15/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block15/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block15/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 704, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv69": {
+            "type": "conv", 
+            "input": ["conv68"], 
+            "output": ["concat33"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block15/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat33": {
+            "type": "concat", 
+            "input": ["concat32", "conv69"], 
+            "output": ["batch_norm36", "concat34"], 
+            "input_shapes": [[-1, 14, 14, 32]], 
+            "output_shapes": [[-1, 14, 14, 736]], 
+            "original_names": ["densenet121/dense_block3/conv_block15/concat"]
+        }, 
+        "batch_norm36": {
+            "type": "batch_norm", 
+            "input": ["concat33"], 
+            "output": ["conv70"], 
+            "input_shapes": [[-1, 14, 14, 736]], 
+            "output_shapes": [[-1, 14, 14, 736]], 
+            "original_names": ["densenet121/dense_block3/conv_block16/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block16/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv70": {
+            "type": "conv", 
+            "input": ["batch_norm36"], 
+            "output": ["conv71"], 
+            "input_shapes": [[-1, 14, 14, 736]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block16/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block16/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block16/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 736, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv71": {
+            "type": "conv", 
+            "input": ["conv70"], 
+            "output": ["concat34"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block16/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat34": {
+            "type": "concat", 
+            "input": ["concat33", "conv71"], 
+            "output": ["batch_norm37", "concat35"], 
+            "input_shapes": [[-1, 14, 14, 32]], 
+            "output_shapes": [[-1, 14, 14, 768]], 
+            "original_names": ["densenet121/dense_block3/conv_block16/concat"]
+        }, 
+        "batch_norm37": {
+            "type": "batch_norm", 
+            "input": ["concat34"], 
+            "output": ["conv72"], 
+            "input_shapes": [[-1, 14, 14, 768]], 
+            "output_shapes": [[-1, 14, 14, 768]], 
+            "original_names": ["densenet121/dense_block3/conv_block17/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block17/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv72": {
+            "type": "conv", 
+            "input": ["batch_norm37"], 
+            "output": ["conv73"], 
+            "input_shapes": [[-1, 14, 14, 768]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block17/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block17/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block17/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 768, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv73": {
+            "type": "conv", 
+            "input": ["conv72"], 
+            "output": ["concat35"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block17/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat35": {
+            "type": "concat", 
+            "input": ["concat34", "conv73"], 
+            "output": ["batch_norm38", "concat36"], 
+            "input_shapes": [[-1, 14, 14, 768]], 
+            "output_shapes": [[-1, 14, 14, 800]], 
+            "original_names": ["densenet121/dense_block3/conv_block17/concat"]
+        }, 
+        "batch_norm38": {
+            "type": "batch_norm", 
+            "input": ["concat35"], 
+            "output": ["conv74"], 
+            "input_shapes": [[-1, 14, 14, 800]], 
+            "output_shapes": [[-1, 14, 14, 800]], 
+            "original_names": ["densenet121/dense_block3/conv_block18/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block18/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv74": {
+            "type": "conv", 
+            "input": ["batch_norm38"], 
+            "output": ["conv75"], 
+            "input_shapes": [[-1, 14, 14, 800]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block18/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block18/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block18/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 800, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv75": {
+            "type": "conv", 
+            "input": ["conv74"], 
+            "output": ["concat36"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block18/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat36": {
+            "type": "concat", 
+            "input": ["concat35", "conv75"], 
+            "output": ["batch_norm39", "concat37"], 
+            "input_shapes": [[-1, 14, 14, 800]], 
+            "output_shapes": [[-1, 14, 14, 832]], 
+            "original_names": ["densenet121/dense_block3/conv_block18/concat"]
+        }, 
+        "batch_norm39": {
+            "type": "batch_norm", 
+            "input": ["concat36"], 
+            "output": ["conv76"], 
+            "input_shapes": [[-1, 14, 14, 832]], 
+            "output_shapes": [[-1, 14, 14, 832]], 
+            "original_names": ["densenet121/dense_block3/conv_block19/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block19/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv76": {
+            "type": "conv", 
+            "input": ["batch_norm39"], 
+            "output": ["conv77"], 
+            "input_shapes": [[-1, 14, 14, 832]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block19/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block19/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block19/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 832, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv77": {
+            "type": "conv", 
+            "input": ["conv76"], 
+            "output": ["concat37"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block19/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat37": {
+            "type": "concat", 
+            "input": ["concat36", "conv77"], 
+            "output": ["batch_norm40", "concat38"], 
+            "input_shapes": [[-1, 14, 14, 832]], 
+            "output_shapes": [[-1, 14, 14, 864]], 
+            "original_names": ["densenet121/dense_block3/conv_block19/concat"]
+        }, 
+        "batch_norm40": {
+            "type": "batch_norm", 
+            "input": ["concat37"], 
+            "output": ["conv78"], 
+            "input_shapes": [[-1, 14, 14, 864]], 
+            "output_shapes": [[-1, 14, 14, 864]], 
+            "original_names": ["densenet121/dense_block3/conv_block20/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block20/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv78": {
+            "type": "conv", 
+            "input": ["batch_norm40"], 
+            "output": ["conv79"], 
+            "input_shapes": [[-1, 14, 14, 864]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block20/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block20/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block20/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 864, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv79": {
+            "type": "conv", 
+            "input": ["conv78"], 
+            "output": ["concat38"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block20/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat38": {
+            "type": "concat", 
+            "input": ["concat37", "conv79"], 
+            "output": ["batch_norm41", "concat39"], 
+            "input_shapes": [[-1, 14, 14, 32]], 
+            "output_shapes": [[-1, 14, 14, 896]], 
+            "original_names": ["densenet121/dense_block3/conv_block20/concat"]
+        }, 
+        "batch_norm41": {
+            "type": "batch_norm", 
+            "input": ["concat38"], 
+            "output": ["conv80"], 
+            "input_shapes": [[-1, 14, 14, 896]], 
+            "output_shapes": [[-1, 14, 14, 896]], 
+            "original_names": ["densenet121/dense_block3/conv_block21/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block21/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv80": {
+            "type": "conv", 
+            "input": ["batch_norm41"], 
+            "output": ["conv81"], 
+            "input_shapes": [[-1, 14, 14, 896]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block21/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block21/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block21/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 896, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv81": {
+            "type": "conv", 
+            "input": ["conv80"], 
+            "output": ["concat39"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block21/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat39": {
+            "type": "concat", 
+            "input": ["concat38", "conv81"], 
+            "output": ["batch_norm42", "concat40"], 
+            "input_shapes": [[-1, 14, 14, 896]], 
+            "output_shapes": [[-1, 14, 14, 928]], 
+            "original_names": ["densenet121/dense_block3/conv_block21/concat"]
+        }, 
+        "batch_norm42": {
+            "type": "batch_norm", 
+            "input": ["concat39"], 
+            "output": ["conv82"], 
+            "input_shapes": [[-1, 14, 14, 928]], 
+            "output_shapes": [[-1, 14, 14, 928]], 
+            "original_names": ["densenet121/dense_block3/conv_block22/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block22/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv82": {
+            "type": "conv", 
+            "input": ["batch_norm42"], 
+            "output": ["conv83"], 
+            "input_shapes": [[-1, 14, 14, 928]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block22/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block22/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block22/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 928, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv83": {
+            "type": "conv", 
+            "input": ["conv82"], 
+            "output": ["concat40"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block22/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat40": {
+            "type": "concat", 
+            "input": ["concat39", "conv83"], 
+            "output": ["batch_norm43", "concat41"], 
+            "input_shapes": [[-1, 14, 14, 928]], 
+            "output_shapes": [[-1, 14, 14, 960]], 
+            "original_names": ["densenet121/dense_block3/conv_block22/concat"]
+        }, 
+        "batch_norm43": {
+            "type": "batch_norm", 
+            "input": ["concat40"], 
+            "output": ["conv84"], 
+            "input_shapes": [[-1, 14, 14, 960]], 
+            "output_shapes": [[-1, 14, 14, 960]], 
+            "original_names": ["densenet121/dense_block3/conv_block23/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block23/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv84": {
+            "type": "conv", 
+            "input": ["batch_norm43"], 
+            "output": ["conv85"], 
+            "input_shapes": [[-1, 14, 14, 960]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block23/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block23/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block23/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 960, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv85": {
+            "type": "conv", 
+            "input": ["conv84"], 
+            "output": ["concat41"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block23/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat41": {
+            "type": "concat", 
+            "input": ["concat40", "conv85"], 
+            "output": ["batch_norm44", "concat42"], 
+            "input_shapes": [[-1, 14, 14, 32]], 
+            "output_shapes": [[-1, 14, 14, 992]], 
+            "original_names": ["densenet121/dense_block3/conv_block23/concat"]
+        }, 
+        "batch_norm44": {
+            "type": "batch_norm", 
+            "input": ["concat41"], 
+            "output": ["conv86"], 
+            "input_shapes": [[-1, 14, 14, 992]], 
+            "output_shapes": [[-1, 14, 14, 992]], 
+            "original_names": ["densenet121/dense_block3/conv_block24/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block24/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv86": {
+            "type": "conv", 
+            "input": ["batch_norm44"], 
+            "output": ["conv87"], 
+            "input_shapes": [[-1, 14, 14, 992]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["densenet121/dense_block3/conv_block24/x1/Conv/Conv2D", "densenet121/dense_block3/conv_block24/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block3/conv_block24/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 992, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv87": {
+            "type": "conv", 
+            "input": ["conv86"], 
+            "output": ["concat42"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["densenet121/dense_block3/conv_block24/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat42": {
+            "type": "concat", 
+            "input": ["concat41", "conv87"], 
+            "output": ["batch_norm45"], 
+            "input_shapes": [[-1, 14, 14, 32]], 
+            "output_shapes": [[-1, 14, 14, 1024]], 
+            "original_names": ["densenet121/dense_block3/conv_block24/concat"]
+        }, 
+        "batch_norm45": {
+            "type": "batch_norm", 
+            "input": ["concat42"], 
+            "output": ["conv88"], 
+            "input_shapes": [[-1, 14, 14, 1024]], 
+            "output_shapes": [[-1, 14, 14, 1024]], 
+            "original_names": ["densenet121/transition_block3/blk/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/transition_block3/blk/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv88": {
+            "type": "conv", 
+            "input": ["batch_norm45"], 
+            "output": ["avgpool3"], 
+            "input_shapes": [[-1, 14, 14, 1024]], 
+            "output_shapes": [[-1, 14, 14, 512]], 
+            "original_names": ["densenet121/transition_block3/blk/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [1, 1, 1024, 512], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "avgpool3": {
+            "type": "avgpool", 
+            "input": ["conv88"], 
+            "output": ["batch_norm46", "concat43"], 
+            "input_shapes": [[-1, 14, 14, 512]], 
+            "output_shapes": [[-1, 7, 7, 512]], 
+            "original_names": ["densenet121/transition_block3/AvgPool2D/AvgPool"], 
+            "params": {
+                "kernel_shape": [1, 2, 2, 1], 
+                "strides": [1, 2, 2, 1], 
+                "padding": "VALID"
+            }
+        }, 
+        "batch_norm46": {
+            "type": "batch_norm", 
+            "input": ["avgpool3"], 
+            "output": ["conv89"], 
+            "input_shapes": [[-1, 7, 7, 512]], 
+            "output_shapes": [[-1, 7, 7, 512]], 
+            "original_names": ["densenet121/dense_block4/conv_block1/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block1/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv89": {
+            "type": "conv", 
+            "input": ["batch_norm46"], 
+            "output": ["conv90"], 
+            "input_shapes": [[-1, 7, 7, 512]], 
+            "output_shapes": [[-1, 7, 7, 128]], 
+            "original_names": ["densenet121/dense_block4/conv_block1/x1/Conv/Conv2D", "densenet121/dense_block4/conv_block1/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block1/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 512, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv90": {
+            "type": "conv", 
+            "input": ["conv89"], 
+            "output": ["concat43"], 
+            "input_shapes": [[-1, 7, 7, 128]], 
+            "output_shapes": [[-1, 7, 7, 32]], 
+            "original_names": ["densenet121/dense_block4/conv_block1/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat43": {
+            "type": "concat", 
+            "input": ["avgpool3", "conv90"], 
+            "output": ["batch_norm47", "concat44"], 
+            "input_shapes": [[-1, 7, 7, 512]], 
+            "output_shapes": [[-1, 7, 7, 544]], 
+            "original_names": ["densenet121/dense_block4/conv_block1/concat"]
+        }, 
+        "batch_norm47": {
+            "type": "batch_norm", 
+            "input": ["concat43"], 
+            "output": ["conv91"], 
+            "input_shapes": [[-1, 7, 7, 544]], 
+            "output_shapes": [[-1, 7, 7, 544]], 
+            "original_names": ["densenet121/dense_block4/conv_block2/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block2/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv91": {
+            "type": "conv", 
+            "input": ["batch_norm47"], 
+            "output": ["conv92"], 
+            "input_shapes": [[-1, 7, 7, 544]], 
+            "output_shapes": [[-1, 7, 7, 128]], 
+            "original_names": ["densenet121/dense_block4/conv_block2/x1/Conv/Conv2D", "densenet121/dense_block4/conv_block2/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block2/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 544, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv92": {
+            "type": "conv", 
+            "input": ["conv91"], 
+            "output": ["concat44"], 
+            "input_shapes": [[-1, 7, 7, 128]], 
+            "output_shapes": [[-1, 7, 7, 32]], 
+            "original_names": ["densenet121/dense_block4/conv_block2/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat44": {
+            "type": "concat", 
+            "input": ["concat43", "conv92"], 
+            "output": ["batch_norm48", "concat45"], 
+            "input_shapes": [[-1, 7, 7, 544]], 
+            "output_shapes": [[-1, 7, 7, 576]], 
+            "original_names": ["densenet121/dense_block4/conv_block2/concat"]
+        }, 
+        "batch_norm48": {
+            "type": "batch_norm", 
+            "input": ["concat44"], 
+            "output": ["conv93"], 
+            "input_shapes": [[-1, 7, 7, 576]], 
+            "output_shapes": [[-1, 7, 7, 576]], 
+            "original_names": ["densenet121/dense_block4/conv_block3/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block3/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv93": {
+            "type": "conv", 
+            "input": ["batch_norm48"], 
+            "output": ["conv94"], 
+            "input_shapes": [[-1, 7, 7, 576]], 
+            "output_shapes": [[-1, 7, 7, 128]], 
+            "original_names": ["densenet121/dense_block4/conv_block3/x1/Conv/Conv2D", "densenet121/dense_block4/conv_block3/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block3/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 576, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv94": {
+            "type": "conv", 
+            "input": ["conv93"], 
+            "output": ["concat45"], 
+            "input_shapes": [[-1, 7, 7, 128]], 
+            "output_shapes": [[-1, 7, 7, 32]], 
+            "original_names": ["densenet121/dense_block4/conv_block3/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat45": {
+            "type": "concat", 
+            "input": ["concat44", "conv94"], 
+            "output": ["batch_norm49", "concat46"], 
+            "input_shapes": [[-1, 7, 7, 576]], 
+            "output_shapes": [[-1, 7, 7, 608]], 
+            "original_names": ["densenet121/dense_block4/conv_block3/concat"]
+        }, 
+        "batch_norm49": {
+            "type": "batch_norm", 
+            "input": ["concat45"], 
+            "output": ["conv95"], 
+            "input_shapes": [[-1, 7, 7, 608]], 
+            "output_shapes": [[-1, 7, 7, 608]], 
+            "original_names": ["densenet121/dense_block4/conv_block4/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block4/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv95": {
+            "type": "conv", 
+            "input": ["batch_norm49"], 
+            "output": ["conv96"], 
+            "input_shapes": [[-1, 7, 7, 608]], 
+            "output_shapes": [[-1, 7, 7, 128]], 
+            "original_names": ["densenet121/dense_block4/conv_block4/x1/Conv/Conv2D", "densenet121/dense_block4/conv_block4/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block4/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 608, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv96": {
+            "type": "conv", 
+            "input": ["conv95"], 
+            "output": ["concat46"], 
+            "input_shapes": [[-1, 7, 7, 128]], 
+            "output_shapes": [[-1, 7, 7, 32]], 
+            "original_names": ["densenet121/dense_block4/conv_block4/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat46": {
+            "type": "concat", 
+            "input": ["concat45", "conv96"], 
+            "output": ["batch_norm50", "concat47"], 
+            "input_shapes": [[-1, 7, 7, 32]], 
+            "output_shapes": [[-1, 7, 7, 640]], 
+            "original_names": ["densenet121/dense_block4/conv_block4/concat"]
+        }, 
+        "batch_norm50": {
+            "type": "batch_norm", 
+            "input": ["concat46"], 
+            "output": ["conv97"], 
+            "input_shapes": [[-1, 7, 7, 640]], 
+            "output_shapes": [[-1, 7, 7, 640]], 
+            "original_names": ["densenet121/dense_block4/conv_block5/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block5/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv97": {
+            "type": "conv", 
+            "input": ["batch_norm50"], 
+            "output": ["conv98"], 
+            "input_shapes": [[-1, 7, 7, 640]], 
+            "output_shapes": [[-1, 7, 7, 128]], 
+            "original_names": ["densenet121/dense_block4/conv_block5/x1/Conv/Conv2D", "densenet121/dense_block4/conv_block5/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block5/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 640, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv98": {
+            "type": "conv", 
+            "input": ["conv97"], 
+            "output": ["concat47"], 
+            "input_shapes": [[-1, 7, 7, 128]], 
+            "output_shapes": [[-1, 7, 7, 32]], 
+            "original_names": ["densenet121/dense_block4/conv_block5/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat47": {
+            "type": "concat", 
+            "input": ["concat46", "conv98"], 
+            "output": ["batch_norm51", "concat48"], 
+            "input_shapes": [[-1, 7, 7, 640]], 
+            "output_shapes": [[-1, 7, 7, 672]], 
+            "original_names": ["densenet121/dense_block4/conv_block5/concat"]
+        },
+        "batch_norm51": {
+            "type": "batch_norm", 
+            "input": ["concat47"], 
+            "output": ["conv99"], 
+            "input_shapes": [[-1, 7, 7, 672]], 
+            "output_shapes": [[-1, 7, 7, 672]], 
+            "original_names": ["densenet121/dense_block4/conv_block6/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block6/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv99": {
+            "type": "conv", 
+            "input": ["batch_norm51"], 
+            "output": ["conv100"], 
+            "input_shapes": [[-1, 7, 7, 672]], 
+            "output_shapes": [[-1, 7, 7, 128]], 
+            "original_names": ["densenet121/dense_block4/conv_block6/x1/Conv/Conv2D", "densenet121/dense_block4/conv_block6/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block6/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 672, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv100": {
+            "type": "conv", 
+            "input": ["conv99"], 
+            "output": ["concat48"], 
+            "input_shapes": [[-1, 7, 7, 128]], 
+            "output_shapes": [[-1, 7, 7, 32]], 
+            "original_names": ["densenet121/dense_block4/conv_block6/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat48": {
+            "type": "concat", 
+            "input": ["concat47", "conv100"], 
+            "output": ["batch_norm52", "concat49"], 
+            "input_shapes": [[-1, 7, 7, 32]], 
+            "output_shapes": [[-1, 7, 7, 704]], 
+            "original_names": ["densenet121/dense_block4/conv_block6/concat"]
+        }, 
+        "batch_norm52": {
+            "type": "batch_norm", 
+            "input": ["concat48"], 
+            "output": ["conv101"], 
+            "input_shapes": [[-1, 7, 7, 704]], 
+            "output_shapes": [[-1, 7, 7, 704]], 
+            "original_names": ["densenet121/dense_block4/conv_block7/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block7/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv101": {
+            "type": "conv", 
+            "input": ["batch_norm52"], 
+            "output": ["conv102"], 
+            "input_shapes": [[-1, 7, 7, 704]], 
+            "output_shapes": [[-1, 7, 7, 128]], 
+            "original_names": ["densenet121/dense_block4/conv_block7/x1/Conv/Conv2D", "densenet121/dense_block4/conv_block7/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block7/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 704, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv102": {
+            "type": "conv", 
+            "input": ["conv101"], 
+            "output": ["concat49"], 
+            "input_shapes": [[-1, 7, 7, 128]], 
+            "output_shapes": [[-1, 7, 7, 32]], 
+            "original_names": ["densenet121/dense_block4/conv_block7/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat49": {
+            "type": "concat", 
+            "input": ["concat48", "conv102"], 
+            "output": ["batch_norm53", "concat50"], 
+            "input_shapes": [[-1, 7, 7, 32]], 
+            "output_shapes": [[-1, 7, 7, 736]], 
+            "original_names": ["densenet121/dense_block4/conv_block7/concat"]
+        }, 
+        "batch_norm53": {
+            "type": "batch_norm", 
+            "input": ["concat49"], 
+            "output": ["conv103"], 
+            "input_shapes": [[-1, 7, 7, 736]], 
+            "output_shapes": [[-1, 7, 7, 736]], 
+            "original_names": ["densenet121/dense_block4/conv_block8/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block8/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv103": {
+            "type": "conv", 
+            "input": ["batch_norm53"], 
+            "output": ["conv104"], 
+            "input_shapes": [[-1, 7, 7, 736]], 
+            "output_shapes": [[-1, 7, 7, 128]], 
+            "original_names": ["densenet121/dense_block4/conv_block8/x1/Conv/Conv2D", "densenet121/dense_block4/conv_block8/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block8/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 736, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv104": {
+            "type": "conv", 
+            "input": ["conv103"], 
+            "output": ["concat50"], 
+            "input_shapes": [[-1, 7, 7, 128]], 
+            "output_shapes": [[-1, 7, 7, 32]], 
+            "original_names": ["densenet121/dense_block4/conv_block8/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat50": {
+            "type": "concat", 
+            "input": ["concat49", "conv104"], 
+            "output": ["batch_norm54", "concat51"], 
+            "input_shapes": [[-1, 7, 7, 32]], 
+            "output_shapes": [[-1, 7, 7, 768]], 
+            "original_names": ["densenet121/dense_block4/conv_block8/concat"]
+        }, 
+        "batch_norm54": {
+            "type": "batch_norm", 
+            "input": ["concat50"], 
+            "output": ["conv105"], 
+            "input_shapes": [[-1, 7, 7, 768]], 
+            "output_shapes": [[-1, 7, 7, 768]], 
+            "original_names": ["densenet121/dense_block4/conv_block9/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block9/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv105": {
+            "type": "conv", 
+            "input": ["batch_norm54"], 
+            "output": ["conv106"], 
+            "input_shapes": [[-1, 7, 7, 768]], 
+            "output_shapes": [[-1, 7, 7, 128]], 
+            "original_names": ["densenet121/dense_block4/conv_block9/x1/Conv/Conv2D", "densenet121/dense_block4/conv_block9/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block9/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 768, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv106": {
+            "type": "conv", 
+            "input": ["conv105"], 
+            "output": ["concat51"], 
+            "input_shapes": [[-1, 7, 7, 128]], 
+            "output_shapes": [[-1, 7, 7, 32]], 
+            "original_names": ["densenet121/dense_block4/conv_block9/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat51": {
+            "type": "concat", 
+            "input": ["concat50", "conv106"], 
+            "output": ["batch_norm55", "concat52"], 
+            "input_shapes": [[-1, 7, 7, 768]], 
+            "output_shapes": [[-1, 7, 7, 800]], 
+            "original_names": ["densenet121/dense_block4/conv_block9/concat"]
+        }, 
+        "batch_norm55": {
+            "type": "batch_norm", 
+            "input": ["concat51"], 
+            "output": ["conv107"], 
+            "input_shapes": [[-1, 7, 7, 800]], 
+            "output_shapes": [[-1, 7, 7, 800]], 
+            "original_names": ["densenet121/dense_block4/conv_block10/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block10/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv107": {
+            "type": "conv", 
+            "input": ["batch_norm55"], 
+            "output": ["conv108"], 
+            "input_shapes": [[-1, 7, 7, 800]], 
+            "output_shapes": [[-1, 7, 7, 128]], 
+            "original_names": ["densenet121/dense_block4/conv_block10/x1/Conv/Conv2D", "densenet121/dense_block4/conv_block10/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block10/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 800, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv108": {
+            "type": "conv", 
+            "input": ["conv107"], 
+            "output": ["concat52"], 
+            "input_shapes": [[-1, 7, 7, 128]], 
+            "output_shapes": [[-1, 7, 7, 32]], 
+            "original_names": ["densenet121/dense_block4/conv_block10/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat52": {
+            "type": "concat", 
+            "input": ["concat51", "conv108"], 
+            "output": ["batch_norm56", "concat53"], 
+            "input_shapes": [[-1, 7, 7, 800]], 
+            "output_shapes": [[-1, 7, 7, 832]], 
+            "original_names": ["densenet121/dense_block4/conv_block10/concat"]
+        }, 
+        "batch_norm56": {
+            "type": "batch_norm", 
+            "input": ["concat52"], 
+            "output": ["conv109"], 
+            "input_shapes": [[-1, 7, 7, 832]], 
+            "output_shapes": [[-1, 7, 7, 832]], 
+            "original_names": ["densenet121/dense_block4/conv_block11/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block11/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv109": {
+            "type": "conv", 
+            "input": ["batch_norm56"], 
+            "output": ["conv110"], 
+            "input_shapes": [[-1, 7, 7, 832]], 
+            "output_shapes": [[-1, 7, 7, 128]], 
+            "original_names": ["densenet121/dense_block4/conv_block11/x1/Conv/Conv2D", "densenet121/dense_block4/conv_block11/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block11/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 832, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv110": {
+            "type": "conv", 
+            "input": ["conv109"], 
+            "output": ["concat53"], 
+            "input_shapes": [[-1, 7, 7, 128]], 
+            "output_shapes": [[-1, 7, 7, 32]], 
+            "original_names": ["densenet121/dense_block4/conv_block11/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat53": {
+            "type": "concat", 
+            "input": ["concat52", "conv110"], 
+            "output": ["batch_norm57", "concat54"], 
+            "input_shapes": [[-1, 7, 7, 832]], 
+            "output_shapes": [[-1, 7, 7, 864]], 
+            "original_names": ["densenet121/dense_block4/conv_block11/concat"]
+        }, 
+        "batch_norm57": {
+            "type": "batch_norm", 
+            "input": ["concat53"], 
+            "output": ["conv111"], 
+            "input_shapes": [[-1, 7, 7, 864]], 
+            "output_shapes": [[-1, 7, 7, 864]], 
+            "original_names": ["densenet121/dense_block4/conv_block12/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block12/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv111": {
+            "type": "conv", 
+            "input": ["batch_norm57"], 
+            "output": ["conv112"], 
+            "input_shapes": [[-1, 7, 7, 864]], 
+            "output_shapes": [[-1, 7, 7, 128]], 
+            "original_names": ["densenet121/dense_block4/conv_block12/x1/Conv/Conv2D", "densenet121/dense_block4/conv_block12/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block12/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 864, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv112": {
+            "type": "conv", 
+            "input": ["conv111"], 
+            "output": ["concat54"], 
+            "input_shapes": [[-1, 7, 7, 128]], 
+            "output_shapes": [[-1, 7, 7, 32]], 
+            "original_names": ["densenet121/dense_block4/conv_block12/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat54": {
+            "type": "concat", 
+            "input": ["concat53", "conv112"], 
+            "output": ["batch_norm58", "concat55"], 
+            "input_shapes": [[-1, 7, 7, 32]], 
+            "output_shapes": [[-1, 7, 7, 896]], 
+            "original_names": ["densenet121/dense_block4/conv_block12/concat"]
+        }, 
+        "batch_norm58": {
+            "type": "batch_norm", 
+            "input": ["concat54"], 
+            "output": ["conv113"], 
+            "input_shapes": [[-1, 7, 7, 896]], 
+            "output_shapes": [[-1, 7, 7, 896]], 
+            "original_names": ["densenet121/dense_block4/conv_block13/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block13/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv113": {
+            "type": "conv", 
+            "input": ["batch_norm58"], 
+            "output": ["conv114"], 
+            "input_shapes": [[-1, 7, 7, 896]], 
+            "output_shapes": [[-1, 7, 7, 128]], 
+            "original_names": ["densenet121/dense_block4/conv_block13/x1/Conv/Conv2D", "densenet121/dense_block4/conv_block13/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block13/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 896, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv114": {
+            "type": "conv", 
+            "input": ["conv113"], 
+            "output": ["concat55"], 
+            "input_shapes": [[-1, 7, 7, 128]], 
+            "output_shapes": [[-1, 7, 7, 32]], 
+            "original_names": ["densenet121/dense_block4/conv_block13/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat55": {
+            "type": "concat", 
+            "input": ["concat54", "conv114"], 
+            "output": ["batch_norm59", "concat56"], 
+            "input_shapes": [[-1, 7, 7, 896]], 
+            "output_shapes": [[-1, 7, 7, 928]], 
+            "original_names": ["densenet121/dense_block4/conv_block13/concat"]
+        }, 
+        "batch_norm59": {
+            "type": "batch_norm", 
+            "input": ["concat55"], 
+            "output": ["conv115"], 
+            "input_shapes": [[-1, 7, 7, 928]], 
+            "output_shapes": [[-1, 7, 7, 928]], 
+            "original_names": ["densenet121/dense_block4/conv_block14/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block14/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv115": {
+            "type": "conv", 
+            "input": ["batch_norm59"], 
+            "output": ["conv116"], 
+            "input_shapes": [[-1, 7, 7, 928]], 
+            "output_shapes": [[-1, 7, 7, 128]], 
+            "original_names": ["densenet121/dense_block4/conv_block14/x1/Conv/Conv2D", "densenet121/dense_block4/conv_block14/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block14/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 928, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv116": {
+            "type": "conv", 
+            "input": ["conv115"], 
+            "output": ["concat56"], 
+            "input_shapes": [[-1, 7, 7, 128]], 
+            "output_shapes": [[-1, 7, 7, 32]], 
+            "original_names": ["densenet121/dense_block4/conv_block14/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat56": {
+            "type": "concat", 
+            "input": ["concat55", "conv116"], 
+            "output": ["batch_norm60", "concat57"], 
+            "input_shapes": [[-1, 7, 7, 32]], 
+            "output_shapes": [[-1, 7, 7, 960]], 
+            "original_names": ["densenet121/dense_block4/conv_block14/concat"]
+        }, 
+        "batch_norm60": {
+            "type": "batch_norm", 
+            "input": ["concat56"], 
+            "output": ["conv117"], 
+            "input_shapes": [[-1, 7, 7, 960]], 
+            "output_shapes": [[-1, 7, 7, 960]], 
+            "original_names": ["densenet121/dense_block4/conv_block15/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block15/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv117": {
+            "type": "conv", 
+            "input": ["batch_norm60"], 
+            "output": ["conv118"], 
+            "input_shapes": [[-1, 7, 7, 960]], 
+            "output_shapes": [[-1, 7, 7, 128]], 
+            "original_names": ["densenet121/dense_block4/conv_block15/x1/Conv/Conv2D", "densenet121/dense_block4/conv_block15/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block15/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 960, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv118": {
+            "type": "conv", 
+            "input": ["conv117"], 
+            "output": ["concat57"], 
+            "input_shapes": [[-1, 7, 7, 128]], 
+            "output_shapes": [[-1, 7, 7, 32]], 
+            "original_names": ["densenet121/dense_block4/conv_block15/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat57": {
+            "type": "concat", 
+            "input": ["concat56", "conv118"], 
+            "output": ["batch_norm61", "concat58"], 
+            "input_shapes": [[-1, 7, 7, 32]], 
+            "output_shapes": [[-1, 7, 7, 992]], 
+            "original_names": ["densenet121/dense_block4/conv_block15/concat"]
+        }, 
+        "batch_norm61": {
+            "type": "batch_norm", 
+            "input": ["concat57"], 
+            "output": ["conv119"], 
+            "input_shapes": [[-1, 7, 7, 992]], 
+            "output_shapes": [[-1, 7, 7, 992]], 
+            "original_names": ["densenet121/dense_block4/conv_block16/x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block16/x1/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "conv119": {
+            "type": "conv", 
+            "input": ["batch_norm61"], 
+            "output": ["conv120"], 
+            "input_shapes": [[-1, 7, 7, 992]], 
+            "output_shapes": [[-1, 7, 7, 128]], 
+            "original_names": ["densenet121/dense_block4/conv_block16/x1/Conv/Conv2D", "densenet121/dense_block4/conv_block16/x2/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/dense_block4/conv_block16/x2/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 992, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv120": {
+            "type": "conv", 
+            "input": ["conv119"], 
+            "output": ["concat58"], 
+            "input_shapes": [[-1, 7, 7, 128]], 
+            "output_shapes": [[-1, 7, 7, 32]], 
+            "original_names": ["densenet121/dense_block4/conv_block16/x2/Conv/Conv2D"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "concat58": {
+            "type": "concat", 
+            "input": ["concat57", "conv120"], 
+            "output": ["batch_norm62"], 
+            "input_shapes": [[-1, 7, 7, 32]], 
+            "output_shapes": [[-1, 7, 7, 1024]], 
+            "original_names": ["densenet121/dense_block4/conv_block16/concat"]
+        }, 
+        "batch_norm62": {
+            "type": "batch_norm", 
+            "input": ["concat58"], 
+            "output": ["avgpool4"], 
+            "input_shapes": [[-1, 7, 7, 1024]], 
+            "output_shapes": [[-1, 7, 7, 1024]], 
+            "original_names": ["densenet121/final_block/BatchNorm/cond/FusedBatchNorm_1/Switch", "densenet121/final_block/Relu"], 
+            "params": {
+                "activation": "relu"
+            }
+        }, 
+        "avgpool4": {
+            "type": "avgpool", 
+            "input": ["batch_norm62"], 
+            "output": ["conv121"], 
+            "input_shapes": [[-1, 7, 7, 1024]], 
+            "output_shapes": [[-1, 1, 1, 1024]], 
+            "original_names": ["densenet121/final_block/global_avg_pool/Mean"], 
+            "params": {
+                "kernel_shape": [1, 7, 7, 1], 
+                "strides": [1, 7, 7, 1], 
+                "padding": "VALID"
+            }
+        }, 
+        "conv121": {
+            "type": "conv", 
+            "input": ["avgpool4"], 
+            "output": ["output_layer1"], 
+            "input_shapes": [[-1, 1, 1, 1024]], 
+            "output_shapes": [[-1, 1, 1, 1000]], 
+            "original_names": ["densenet121/logits/Conv2D", "densenet121/logits/BiasAdd"], 
+            "params": {
+                "kernel_shape": [1, 1, 1024, 1000], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "output_layer1": {
+            "type": "output_layer", 
+            "input": ["conv121"], 
+            "output": [], 
+            "input_shapes": [[-1, 1, 1, 1000]], 
+            "output_shapes": [[-1, 1, 1, 1000]]
+        }
+    }
+}

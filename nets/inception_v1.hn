@@ -1,0 +1,1261 @@
+{
+    "name": "inception_v1", 
+    "layers": {
+        "input_layer": {
+            "type": "input_layer", 
+            "input": [], 
+            "output": ["conv1"], 
+            "input_shapes": [[-1, 224, 224, 3]], 
+            "output_shapes": [[-1, 224, 224, 3]], 
+            "original_names": ["input_image"]
+        }, 
+        "conv1": {
+            "type": "conv", 
+            "input": ["input_layer"], 
+            "output": ["maxpool1"], 
+            "input_shapes": [[-1, 224, 224, 3]], 
+            "output_shapes": [[-1, 112, 112, 64]], 
+            "original_names": ["InceptionV1/InceptionV1/Conv2d_1a_7x7/Conv2D", "InceptionV1/InceptionV1/Conv2d_1a_7x7/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Conv2d_1a_7x7/Relu"], 
+            "params": {
+                "kernel_shape": [7, 7, 3, 64], 
+                "strides": [1, 2, 2, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "maxpool1": {
+            "type": "maxpool", 
+            "input": ["conv1"], 
+            "output": ["conv2"], 
+            "input_shapes": [[-1, 112, 112, 64]], 
+            "output_shapes": [[-1, 56, 56, 64]], 
+            "original_names": ["InceptionV1/InceptionV1/MaxPool_2a_3x3/MaxPool"], 
+            "params": {
+                "kernel_shape": [1, 3, 3, 1], 
+                "strides": [1, 2, 2, 1], 
+                "padding": "SAME_TENSORFLOW"
+            }
+        }, 
+        "conv2": {
+            "type": "conv", 
+            "input": ["maxpool1"], 
+            "output": ["conv3"], 
+            "input_shapes": [[-1, 56, 56, 64]], 
+            "output_shapes": [[-1, 56, 56, 64]], 
+            "original_names": ["InceptionV1/InceptionV1/Conv2d_2b_1x1/Conv2D", "InceptionV1/InceptionV1/Conv2d_2b_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Conv2d_2b_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 64, 64], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv3": {
+            "type": "conv", 
+            "input": ["conv2"], 
+            "output": ["maxpool2"], 
+            "input_shapes": [[-1, 56, 56, 64]], 
+            "output_shapes": [[-1, 56, 56, 192]], 
+            "original_names": ["InceptionV1/InceptionV1/Conv2d_2c_3x3/Conv2D", "InceptionV1/InceptionV1/Conv2d_2c_3x3/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Conv2d_2c_3x3/Relu"], 
+            "params": {
+                "kernel_shape": [3, 3, 64, 192], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "maxpool2": {
+            "type": "maxpool", 
+            "input": ["conv3"], 
+            "output": ["conv4", "conv5", "conv6", "maxpool3"], 
+            "input_shapes": [[-1, 56, 56, 192]], 
+            "output_shapes": [[-1, 28, 28, 192]], 
+            "original_names": ["InceptionV1/InceptionV1/MaxPool_3a_3x3/MaxPool"], 
+            "params": {
+                "kernel_shape": [1, 3, 3, 1], 
+                "strides": [1, 2, 2, 1], 
+                "padding": "SAME_TENSORFLOW"
+            }
+        }, 
+        "conv4": {
+            "type": "conv", 
+            "input": ["maxpool2"], 
+            "output": ["concat1"], 
+            "input_shapes": [[-1, 28, 28, 192]], 
+            "output_shapes": [[-1, 28, 28, 64]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_3b/Branch_0/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_3b/Branch_0/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_3b/Branch_0/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 192, 64], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv5": {
+            "type": "conv", 
+            "input": ["maxpool2"], 
+            "output": ["conv7"], 
+            "input_shapes": [[-1, 28, 28, 192]], 
+            "output_shapes": [[-1, 28, 28, 96]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_3b/Branch_1/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_3b/Branch_1/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_3b/Branch_1/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 192, 96], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv6": {
+            "type": "conv", 
+            "input": ["maxpool2"], 
+            "output": ["conv8"], 
+            "input_shapes": [[-1, 28, 28, 192]], 
+            "output_shapes": [[-1, 28, 28, 16]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_3b/Branch_2/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_3b/Branch_2/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_3b/Branch_2/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 192, 16], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv7": {
+            "type": "conv", 
+            "input": ["conv5"], 
+            "output": ["concat1"], 
+            "input_shapes": [[-1, 28, 28, 96]], 
+            "output_shapes": [[-1, 28, 28, 128]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_3b/Branch_1/Conv2d_0b_3x3/Conv2D", "InceptionV1/InceptionV1/Mixed_3b/Branch_1/Conv2d_0b_3x3/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_3b/Branch_1/Conv2d_0b_3x3/Relu"], 
+            "params": {
+                "kernel_shape": [3, 3, 96, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv8": {
+            "type": "conv", 
+            "input": ["conv6"], 
+            "output": ["concat1"], 
+            "input_shapes": [[-1, 28, 28, 16]], 
+            "output_shapes": [[-1, 28, 28, 32]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_3b/Branch_2/Conv2d_0b_3x3/Conv2D", "InceptionV1/InceptionV1/Mixed_3b/Branch_2/Conv2d_0b_3x3/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_3b/Branch_2/Conv2d_0b_3x3/Relu"], 
+            "params": {
+                "kernel_shape": [3, 3, 16, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "maxpool3": {
+            "type": "maxpool", 
+            "input": ["maxpool2"], 
+            "output": ["conv9"], 
+            "input_shapes": [[-1, 28, 28, 192]], 
+            "output_shapes": [[-1, 28, 28, 192]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_3b/Branch_3/MaxPool_0a_3x3/MaxPool"], 
+            "params": {
+                "kernel_shape": [1, 3, 3, 1], 
+                "strides": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW"
+            }
+        }, 
+        "conv9": {
+            "type": "conv", 
+            "input": ["maxpool3"], 
+            "output": ["concat1"], 
+            "input_shapes": [[-1, 28, 28, 192]], 
+            "output_shapes": [[-1, 28, 28, 32]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_3b/Branch_3/Conv2d_0b_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_3b/Branch_3/Conv2d_0b_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_3b/Branch_3/Conv2d_0b_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 192, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "concat1": {
+            "type": "concat", 
+            "input": ["conv4", "conv7", "conv8", "conv9"], 
+            "output": ["conv10", "conv11", "conv12", "maxpool4"], 
+            "input_shapes": [[-1, 28, 28, 64]], 
+            "output_shapes": [[-1, 28, 28, 256]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_3b/concat"]
+        }, 
+        "conv10": {
+            "type": "conv", 
+            "input": ["concat1"], 
+            "output": ["concat2"], 
+            "input_shapes": [[-1, 28, 28, 256]], 
+            "output_shapes": [[-1, 28, 28, 128]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_3c/Branch_0/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_3c/Branch_0/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_3c/Branch_0/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 256, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv11": {
+            "type": "conv", 
+            "input": ["concat1"], 
+            "output": ["conv13"], 
+            "input_shapes": [[-1, 28, 28, 256]], 
+            "output_shapes": [[-1, 28, 28, 128]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_3c/Branch_1/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_3c/Branch_1/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_3c/Branch_1/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 256, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv12": {
+            "type": "conv", 
+            "input": ["concat1"], 
+            "output": ["conv14"], 
+            "input_shapes": [[-1, 28, 28, 256]], 
+            "output_shapes": [[-1, 28, 28, 32]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_3c/Branch_2/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_3c/Branch_2/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_3c/Branch_2/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 256, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv13": {
+            "type": "conv", 
+            "input": ["conv11"], 
+            "output": ["concat2"], 
+            "input_shapes": [[-1, 28, 28, 128]], 
+            "output_shapes": [[-1, 28, 28, 192]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_3c/Branch_1/Conv2d_0b_3x3/Conv2D", "InceptionV1/InceptionV1/Mixed_3c/Branch_1/Conv2d_0b_3x3/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_3c/Branch_1/Conv2d_0b_3x3/Relu"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 192], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv14": {
+            "type": "conv", 
+            "input": ["conv12"], 
+            "output": ["concat2"], 
+            "input_shapes": [[-1, 28, 28, 32]], 
+            "output_shapes": [[-1, 28, 28, 96]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_3c/Branch_2/Conv2d_0b_3x3/Conv2D", "InceptionV1/InceptionV1/Mixed_3c/Branch_2/Conv2d_0b_3x3/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_3c/Branch_2/Conv2d_0b_3x3/Relu"], 
+            "params": {
+                "kernel_shape": [3, 3, 32, 96], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "maxpool4": {
+            "type": "maxpool", 
+            "input": ["concat1"], 
+            "output": ["conv15"], 
+            "input_shapes": [[-1, 28, 28, 256]], 
+            "output_shapes": [[-1, 28, 28, 256]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_3c/Branch_3/MaxPool_0a_3x3/MaxPool"], 
+            "params": {
+                "kernel_shape": [1, 3, 3, 1], 
+                "strides": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW"
+            }
+        }, 
+        "conv15": {
+            "type": "conv", 
+            "input": ["maxpool4"], 
+            "output": ["concat2"], 
+            "input_shapes": [[-1, 28, 28, 256]], 
+            "output_shapes": [[-1, 28, 28, 64]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_3c/Branch_3/Conv2d_0b_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_3c/Branch_3/Conv2d_0b_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_3c/Branch_3/Conv2d_0b_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 256, 64], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "concat2": {
+            "type": "concat", 
+            "input": ["conv10", "conv13", "conv14", "conv15"], 
+            "output": ["maxpool5"], 
+            "input_shapes": [[-1, 28, 28, 64]], 
+            "output_shapes": [[-1, 28, 28, 480]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_3c/concat"]
+        }, 
+        "maxpool5": {
+            "type": "maxpool", 
+            "input": ["concat2"], 
+            "output": ["conv16", "conv17", "conv18", "maxpool6"], 
+            "input_shapes": [[-1, 28, 28, 480]], 
+            "output_shapes": [[-1, 14, 14, 480]], 
+            "original_names": ["InceptionV1/InceptionV1/MaxPool_4a_3x3/MaxPool"], 
+            "params": {
+                "kernel_shape": [1, 3, 3, 1], 
+                "strides": [1, 2, 2, 1], 
+                "padding": "SAME_TENSORFLOW"
+            }
+        }, 
+        "conv16": {
+            "type": "conv", 
+            "input": ["maxpool5"], 
+            "output": ["concat3"], 
+            "input_shapes": [[-1, 14, 14, 480]], 
+            "output_shapes": [[-1, 14, 14, 192]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4b/Branch_0/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_4b/Branch_0/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4b/Branch_0/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 480, 192], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv17": {
+            "type": "conv", 
+            "input": ["maxpool5"], 
+            "output": ["conv19"], 
+            "input_shapes": [[-1, 14, 14, 480]], 
+            "output_shapes": [[-1, 14, 14, 96]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4b/Branch_1/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_4b/Branch_1/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4b/Branch_1/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 480, 96], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv18": {
+            "type": "conv", 
+            "input": ["maxpool5"], 
+            "output": ["conv20"], 
+            "input_shapes": [[-1, 14, 14, 480]], 
+            "output_shapes": [[-1, 14, 14, 16]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4b/Branch_2/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_4b/Branch_2/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4b/Branch_2/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 480, 16], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv19": {
+            "type": "conv", 
+            "input": ["conv17"], 
+            "output": ["concat3"], 
+            "input_shapes": [[-1, 14, 14, 96]], 
+            "output_shapes": [[-1, 14, 14, 208]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4b/Branch_1/Conv2d_0b_3x3/Conv2D", "InceptionV1/InceptionV1/Mixed_4b/Branch_1/Conv2d_0b_3x3/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4b/Branch_1/Conv2d_0b_3x3/Relu"], 
+            "params": {
+                "kernel_shape": [3, 3, 96, 208], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv20": {
+            "type": "conv", 
+            "input": ["conv18"], 
+            "output": ["concat3"], 
+            "input_shapes": [[-1, 14, 14, 16]], 
+            "output_shapes": [[-1, 14, 14, 48]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4b/Branch_2/Conv2d_0b_3x3/Conv2D", "InceptionV1/InceptionV1/Mixed_4b/Branch_2/Conv2d_0b_3x3/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4b/Branch_2/Conv2d_0b_3x3/Relu"], 
+            "params": {
+                "kernel_shape": [3, 3, 16, 48], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "maxpool6": {
+            "type": "maxpool", 
+            "input": ["maxpool5"], 
+            "output": ["conv21"], 
+            "input_shapes": [[-1, 14, 14, 480]], 
+            "output_shapes": [[-1, 14, 14, 480]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4b/Branch_3/MaxPool_0a_3x3/MaxPool"], 
+            "params": {
+                "kernel_shape": [1, 3, 3, 1], 
+                "strides": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW"
+            }
+        }, 
+        "conv21": {
+            "type": "conv", 
+            "input": ["maxpool6"], 
+            "output": ["concat3"], 
+            "input_shapes": [[-1, 14, 14, 480]], 
+            "output_shapes": [[-1, 14, 14, 64]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4b/Branch_3/Conv2d_0b_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_4b/Branch_3/Conv2d_0b_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4b/Branch_3/Conv2d_0b_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 480, 64], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "concat3": {
+            "type": "concat", 
+            "input": ["conv16", "conv19", "conv20", "conv21"], 
+            "output": ["conv22", "conv23", "conv24", "maxpool7"], 
+            "input_shapes": [[-1, 14, 14, 208]], 
+            "output_shapes": [[-1, 14, 14, 512]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4b/concat"]
+        }, 
+        "conv22": {
+            "type": "conv", 
+            "input": ["concat3"], 
+            "output": ["concat4"], 
+            "input_shapes": [[-1, 14, 14, 512]], 
+            "output_shapes": [[-1, 14, 14, 160]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4c/Branch_0/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_4c/Branch_0/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4c/Branch_0/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 512, 160], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv23": {
+            "type": "conv", 
+            "input": ["concat3"], 
+            "output": ["conv25"], 
+            "input_shapes": [[-1, 14, 14, 512]], 
+            "output_shapes": [[-1, 14, 14, 112]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4c/Branch_1/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_4c/Branch_1/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4c/Branch_1/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 512, 112], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv24": {
+            "type": "conv", 
+            "input": ["concat3"], 
+            "output": ["conv26"], 
+            "input_shapes": [[-1, 14, 14, 512]], 
+            "output_shapes": [[-1, 14, 14, 24]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4c/Branch_2/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_4c/Branch_2/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4c/Branch_2/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 512, 24], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv25": {
+            "type": "conv", 
+            "input": ["conv23"], 
+            "output": ["concat4"], 
+            "input_shapes": [[-1, 14, 14, 112]], 
+            "output_shapes": [[-1, 14, 14, 224]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4c/Branch_1/Conv2d_0b_3x3/Conv2D", "InceptionV1/InceptionV1/Mixed_4c/Branch_1/Conv2d_0b_3x3/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4c/Branch_1/Conv2d_0b_3x3/Relu"], 
+            "params": {
+                "kernel_shape": [3, 3, 112, 224], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv26": {
+            "type": "conv", 
+            "input": ["conv24"], 
+            "output": ["concat4"], 
+            "input_shapes": [[-1, 14, 14, 24]], 
+            "output_shapes": [[-1, 14, 14, 64]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4c/Branch_2/Conv2d_0b_3x3/Conv2D", "InceptionV1/InceptionV1/Mixed_4c/Branch_2/Conv2d_0b_3x3/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4c/Branch_2/Conv2d_0b_3x3/Relu"], 
+            "params": {
+                "kernel_shape": [3, 3, 24, 64], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "maxpool7": {
+            "type": "maxpool", 
+            "input": ["concat3"], 
+            "output": ["conv27"], 
+            "input_shapes": [[-1, 14, 14, 512]], 
+            "output_shapes": [[-1, 14, 14, 512]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4c/Branch_3/MaxPool_0a_3x3/MaxPool"], 
+            "params": {
+                "kernel_shape": [1, 3, 3, 1], 
+                "strides": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW"
+            }
+        }, 
+        "conv27": {
+            "type": "conv", 
+            "input": ["maxpool7"], 
+            "output": ["concat4"], 
+            "input_shapes": [[-1, 14, 14, 512]], 
+            "output_shapes": [[-1, 14, 14, 64]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4c/Branch_3/Conv2d_0b_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_4c/Branch_3/Conv2d_0b_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4c/Branch_3/Conv2d_0b_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 512, 64], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "concat4": {
+            "type": "concat", 
+            "input": ["conv22", "conv25", "conv26", "conv27"], 
+            "output": ["conv28", "conv29", "conv30", "maxpool8"], 
+            "input_shapes": [[-1, 14, 14, 224]], 
+            "output_shapes": [[-1, 14, 14, 512]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4c/concat"]
+        }, 
+        "conv28": {
+            "type": "conv", 
+            "input": ["concat4"], 
+            "output": ["concat5"], 
+            "input_shapes": [[-1, 14, 14, 512]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4d/Branch_0/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_4d/Branch_0/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4d/Branch_0/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 512, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv29": {
+            "type": "conv", 
+            "input": ["concat4"], 
+            "output": ["conv31"], 
+            "input_shapes": [[-1, 14, 14, 512]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4d/Branch_1/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_4d/Branch_1/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4d/Branch_1/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 512, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv30": {
+            "type": "conv", 
+            "input": ["concat4"], 
+            "output": ["conv32"], 
+            "input_shapes": [[-1, 14, 14, 512]], 
+            "output_shapes": [[-1, 14, 14, 24]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4d/Branch_2/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_4d/Branch_2/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4d/Branch_2/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 512, 24], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv31": {
+            "type": "conv", 
+            "input": ["conv29"], 
+            "output": ["concat5"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 256]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4d/Branch_1/Conv2d_0b_3x3/Conv2D", "InceptionV1/InceptionV1/Mixed_4d/Branch_1/Conv2d_0b_3x3/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4d/Branch_1/Conv2d_0b_3x3/Relu"], 
+            "params": {
+                "kernel_shape": [3, 3, 128, 256], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv32": {
+            "type": "conv", 
+            "input": ["conv30"], 
+            "output": ["concat5"], 
+            "input_shapes": [[-1, 14, 14, 24]], 
+            "output_shapes": [[-1, 14, 14, 64]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4d/Branch_2/Conv2d_0b_3x3/Conv2D", "InceptionV1/InceptionV1/Mixed_4d/Branch_2/Conv2d_0b_3x3/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4d/Branch_2/Conv2d_0b_3x3/Relu"], 
+            "params": {
+                "kernel_shape": [3, 3, 24, 64], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "maxpool8": {
+            "type": "maxpool", 
+            "input": ["concat4"], 
+            "output": ["conv33"], 
+            "input_shapes": [[-1, 14, 14, 512]], 
+            "output_shapes": [[-1, 14, 14, 512]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4d/Branch_3/MaxPool_0a_3x3/MaxPool"], 
+            "params": {
+                "kernel_shape": [1, 3, 3, 1], 
+                "strides": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW"
+            }
+        }, 
+        "conv33": {
+            "type": "conv", 
+            "input": ["maxpool8"], 
+            "output": ["concat5"], 
+            "input_shapes": [[-1, 14, 14, 512]], 
+            "output_shapes": [[-1, 14, 14, 64]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4d/Branch_3/Conv2d_0b_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_4d/Branch_3/Conv2d_0b_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4d/Branch_3/Conv2d_0b_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 512, 64], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "concat5": {
+            "type": "concat", 
+            "input": ["conv28", "conv31", "conv32", "conv33"], 
+            "output": ["conv34", "conv35", "conv36", "maxpool9"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 512]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4d/concat"]
+        }, 
+        "conv34": {
+            "type": "conv", 
+            "input": ["concat5"], 
+            "output": ["concat6"], 
+            "input_shapes": [[-1, 14, 14, 512]], 
+            "output_shapes": [[-1, 14, 14, 112]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4e/Branch_0/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_4e/Branch_0/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4e/Branch_0/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 512, 112], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv35": {
+            "type": "conv", 
+            "input": ["concat5"], 
+            "output": ["conv37"], 
+            "input_shapes": [[-1, 14, 14, 512]], 
+            "output_shapes": [[-1, 14, 14, 144]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4e/Branch_1/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_4e/Branch_1/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4e/Branch_1/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 512, 144], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv36": {
+            "type": "conv", 
+            "input": ["concat5"], 
+            "output": ["conv38"], 
+            "input_shapes": [[-1, 14, 14, 512]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4e/Branch_2/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_4e/Branch_2/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4e/Branch_2/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 512, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv37": {
+            "type": "conv", 
+            "input": ["conv35"], 
+            "output": ["concat6"], 
+            "input_shapes": [[-1, 14, 14, 144]], 
+            "output_shapes": [[-1, 14, 14, 288]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4e/Branch_1/Conv2d_0b_3x3/Conv2D", "InceptionV1/InceptionV1/Mixed_4e/Branch_1/Conv2d_0b_3x3/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4e/Branch_1/Conv2d_0b_3x3/Relu"], 
+            "params": {
+                "kernel_shape": [3, 3, 144, 288], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv38": {
+            "type": "conv", 
+            "input": ["conv36"], 
+            "output": ["concat6"], 
+            "input_shapes": [[-1, 14, 14, 32]], 
+            "output_shapes": [[-1, 14, 14, 64]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4e/Branch_2/Conv2d_0b_3x3/Conv2D", "InceptionV1/InceptionV1/Mixed_4e/Branch_2/Conv2d_0b_3x3/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4e/Branch_2/Conv2d_0b_3x3/Relu"], 
+            "params": {
+                "kernel_shape": [3, 3, 32, 64], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "maxpool9": {
+            "type": "maxpool", 
+            "input": ["concat5"], 
+            "output": ["conv39"], 
+            "input_shapes": [[-1, 14, 14, 512]], 
+            "output_shapes": [[-1, 14, 14, 512]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4e/Branch_3/MaxPool_0a_3x3/MaxPool"], 
+            "params": {
+                "kernel_shape": [1, 3, 3, 1], 
+                "strides": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW"
+            }
+        }, 
+        "conv39": {
+            "type": "conv", 
+            "input": ["maxpool9"], 
+            "output": ["concat6"], 
+            "input_shapes": [[-1, 14, 14, 512]], 
+            "output_shapes": [[-1, 14, 14, 64]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4e/Branch_3/Conv2d_0b_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_4e/Branch_3/Conv2d_0b_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4e/Branch_3/Conv2d_0b_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 512, 64], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "concat6": {
+            "type": "concat", 
+            "input": ["conv34", "conv37", "conv38", "conv39"], 
+            "output": ["conv40", "conv41", "conv42", "maxpool10"], 
+            "input_shapes": [[-1, 14, 14, 288]], 
+            "output_shapes": [[-1, 14, 14, 528]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4e/concat"]
+        }, 
+        "conv40": {
+            "type": "conv", 
+            "input": ["concat6"], 
+            "output": ["concat7"], 
+            "input_shapes": [[-1, 14, 14, 528]], 
+            "output_shapes": [[-1, 14, 14, 256]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4f/Branch_0/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_4f/Branch_0/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4f/Branch_0/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 528, 256], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv41": {
+            "type": "conv", 
+            "input": ["concat6"], 
+            "output": ["conv43"], 
+            "input_shapes": [[-1, 14, 14, 528]], 
+            "output_shapes": [[-1, 14, 14, 160]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4f/Branch_1/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_4f/Branch_1/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4f/Branch_1/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 528, 160], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv42": {
+            "type": "conv", 
+            "input": ["concat6"], 
+            "output": ["conv44"], 
+            "input_shapes": [[-1, 14, 14, 528]], 
+            "output_shapes": [[-1, 14, 14, 32]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4f/Branch_2/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_4f/Branch_2/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4f/Branch_2/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 528, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv43": {
+            "type": "conv", 
+            "input": ["conv41"], 
+            "output": ["concat7"], 
+            "input_shapes": [[-1, 14, 14, 160]], 
+            "output_shapes": [[-1, 14, 14, 320]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4f/Branch_1/Conv2d_0b_3x3/Conv2D", "InceptionV1/InceptionV1/Mixed_4f/Branch_1/Conv2d_0b_3x3/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4f/Branch_1/Conv2d_0b_3x3/Relu"], 
+            "params": {
+                "kernel_shape": [3, 3, 160, 320], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv44": {
+            "type": "conv", 
+            "input": ["conv42"], 
+            "output": ["concat7"], 
+            "input_shapes": [[-1, 14, 14, 32]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4f/Branch_2/Conv2d_0b_3x3/Conv2D", "InceptionV1/InceptionV1/Mixed_4f/Branch_2/Conv2d_0b_3x3/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4f/Branch_2/Conv2d_0b_3x3/Relu"], 
+            "params": {
+                "kernel_shape": [3, 3, 32, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "maxpool10": {
+            "type": "maxpool", 
+            "input": ["concat6"], 
+            "output": ["conv45"], 
+            "input_shapes": [[-1, 14, 14, 528]], 
+            "output_shapes": [[-1, 14, 14, 528]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4f/Branch_3/MaxPool_0a_3x3/MaxPool"], 
+            "params": {
+                "kernel_shape": [1, 3, 3, 1], 
+                "strides": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW"
+            }
+        }, 
+        "conv45": {
+            "type": "conv", 
+            "input": ["maxpool10"], 
+            "output": ["concat7"], 
+            "input_shapes": [[-1, 14, 14, 528]], 
+            "output_shapes": [[-1, 14, 14, 128]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4f/Branch_3/Conv2d_0b_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_4f/Branch_3/Conv2d_0b_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_4f/Branch_3/Conv2d_0b_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 528, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "concat7": {
+            "type": "concat", 
+            "input": ["conv40", "conv43", "conv44", "conv45"], 
+            "output": ["maxpool11"], 
+            "input_shapes": [[-1, 14, 14, 128]], 
+            "output_shapes": [[-1, 14, 14, 832]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_4f/concat"]
+        }, 
+        "maxpool11": {
+            "type": "maxpool", 
+            "input": ["concat7"], 
+            "output": ["conv46", "conv47", "conv48", "maxpool12"], 
+            "input_shapes": [[-1, 14, 14, 832]], 
+            "output_shapes": [[-1, 7, 7, 832]], 
+            "original_names": ["InceptionV1/InceptionV1/MaxPool_5a_2x2/MaxPool"], 
+            "params": {
+                "kernel_shape": [1, 2, 2, 1], 
+                "strides": [1, 2, 2, 1], 
+                "padding": "SAME_TENSORFLOW"
+            }
+        }, 
+        "conv46": {
+            "type": "conv", 
+            "input": ["maxpool11"], 
+            "output": ["concat8"], 
+            "input_shapes": [[-1, 7, 7, 832]], 
+            "output_shapes": [[-1, 7, 7, 256]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_5b/Branch_0/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_5b/Branch_0/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_5b/Branch_0/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 832, 256], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv47": {
+            "type": "conv", 
+            "input": ["maxpool11"], 
+            "output": ["conv49"], 
+            "input_shapes": [[-1, 7, 7, 832]], 
+            "output_shapes": [[-1, 7, 7, 160]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_5b/Branch_1/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_5b/Branch_1/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_5b/Branch_1/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 832, 160], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv48": {
+            "type": "conv", 
+            "input": ["maxpool11"], 
+            "output": ["conv50"], 
+            "input_shapes": [[-1, 7, 7, 832]], 
+            "output_shapes": [[-1, 7, 7, 32]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_5b/Branch_2/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_5b/Branch_2/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_5b/Branch_2/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 832, 32], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv49": {
+            "type": "conv", 
+            "input": ["conv47"], 
+            "output": ["concat8"], 
+            "input_shapes": [[-1, 7, 7, 160]], 
+            "output_shapes": [[-1, 7, 7, 320]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_5b/Branch_1/Conv2d_0b_3x3/Conv2D", "InceptionV1/InceptionV1/Mixed_5b/Branch_1/Conv2d_0b_3x3/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_5b/Branch_1/Conv2d_0b_3x3/Relu"], 
+            "params": {
+                "kernel_shape": [3, 3, 160, 320], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv50": {
+            "type": "conv", 
+            "input": ["conv48"], 
+            "output": ["concat8"], 
+            "input_shapes": [[-1, 7, 7, 32]], 
+            "output_shapes": [[-1, 7, 7, 128]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_5b/Branch_2/Conv2d_0a_3x3/Conv2D", "InceptionV1/InceptionV1/Mixed_5b/Branch_2/Conv2d_0a_3x3/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_5b/Branch_2/Conv2d_0a_3x3/Relu"], 
+            "params": {
+                "kernel_shape": [3, 3, 32, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "maxpool12": {
+            "type": "maxpool", 
+            "input": ["maxpool11"], 
+            "output": ["conv51"], 
+            "input_shapes": [[-1, 7, 7, 832]], 
+            "output_shapes": [[-1, 7, 7, 832]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_5b/Branch_3/MaxPool_0a_3x3/MaxPool"], 
+            "params": {
+                "kernel_shape": [1, 3, 3, 1], 
+                "strides": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW"
+            }
+        }, 
+        "conv51": {
+            "type": "conv", 
+            "input": ["maxpool12"], 
+            "output": ["concat8"], 
+            "input_shapes": [[-1, 7, 7, 832]], 
+            "output_shapes": [[-1, 7, 7, 128]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_5b/Branch_3/Conv2d_0b_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_5b/Branch_3/Conv2d_0b_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_5b/Branch_3/Conv2d_0b_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 832, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "concat8": {
+            "type": "concat", 
+            "input": ["conv46", "conv49", "conv50", "conv51"], 
+            "output": ["conv52", "conv53", "conv54", "maxpool13"], 
+            "input_shapes": [[-1, 7, 7, 256]], 
+            "output_shapes": [[-1, 7, 7, 832]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_5b/concat"]
+        }, 
+        "conv52": {
+            "type": "conv", 
+            "input": ["concat8"], 
+            "output": ["concat9"], 
+            "input_shapes": [[-1, 7, 7, 832]], 
+            "output_shapes": [[-1, 7, 7, 384]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_5c/Branch_0/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_5c/Branch_0/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_5c/Branch_0/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 832, 384], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv53": {
+            "type": "conv", 
+            "input": ["concat8"], 
+            "output": ["conv55"], 
+            "input_shapes": [[-1, 7, 7, 832]], 
+            "output_shapes": [[-1, 7, 7, 192]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_5c/Branch_1/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_5c/Branch_1/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_5c/Branch_1/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 832, 192], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv54": {
+            "type": "conv", 
+            "input": ["concat8"], 
+            "output": ["conv56"], 
+            "input_shapes": [[-1, 7, 7, 832]], 
+            "output_shapes": [[-1, 7, 7, 48]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_5c/Branch_2/Conv2d_0a_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_5c/Branch_2/Conv2d_0a_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_5c/Branch_2/Conv2d_0a_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 832, 48], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv55": {
+            "type": "conv", 
+            "input": ["conv53"], 
+            "output": ["concat9"], 
+            "input_shapes": [[-1, 7, 7, 192]], 
+            "output_shapes": [[-1, 7, 7, 384]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_5c/Branch_1/Conv2d_0b_3x3/Conv2D", "InceptionV1/InceptionV1/Mixed_5c/Branch_1/Conv2d_0b_3x3/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_5c/Branch_1/Conv2d_0b_3x3/Relu"], 
+            "params": {
+                "kernel_shape": [3, 3, 192, 384], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "conv56": {
+            "type": "conv", 
+            "input": ["conv54"], 
+            "output": ["concat9"], 
+            "input_shapes": [[-1, 7, 7, 48]], 
+            "output_shapes": [[-1, 7, 7, 128]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_5c/Branch_2/Conv2d_0b_3x3/Conv2D", "InceptionV1/InceptionV1/Mixed_5c/Branch_2/Conv2d_0b_3x3/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_5c/Branch_2/Conv2d_0b_3x3/Relu"], 
+            "params": {
+                "kernel_shape": [3, 3, 48, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "maxpool13": {
+            "type": "maxpool", 
+            "input": ["concat8"], 
+            "output": ["conv57"], 
+            "input_shapes": [[-1, 7, 7, 832]], 
+            "output_shapes": [[-1, 7, 7, 832]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_5c/Branch_3/MaxPool_0a_3x3/MaxPool"], 
+            "params": {
+                "kernel_shape": [1, 3, 3, 1], 
+                "strides": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW"
+            }
+        }, 
+        "conv57": {
+            "type": "conv", 
+            "input": ["maxpool13"], 
+            "output": ["concat9"], 
+            "input_shapes": [[-1, 7, 7, 832]], 
+            "output_shapes": [[-1, 7, 7, 128]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_5c/Branch_3/Conv2d_0b_1x1/Conv2D", "InceptionV1/InceptionV1/Mixed_5c/Branch_3/Conv2d_0b_1x1/BatchNorm/cond/FusedBatchNorm_1/Switch", "InceptionV1/InceptionV1/Mixed_5c/Branch_3/Conv2d_0b_1x1/Relu"], 
+            "params": {
+                "kernel_shape": [1, 1, 832, 128], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": true, 
+                "elementwise_add": false, 
+                "activation": "relu"
+            }
+        }, 
+        "concat9": {
+            "type": "concat", 
+            "input": ["conv52", "conv55", "conv56", "conv57"], 
+            "output": ["avgpool1"], 
+            "input_shapes": [[-1, 7, 7, 128]], 
+            "output_shapes": [[-1, 7, 7, 1024]], 
+            "original_names": ["InceptionV1/InceptionV1/Mixed_5c/concat"]
+        }, 
+        "avgpool1": {
+            "type": "avgpool", 
+            "input": ["concat9"], 
+            "output": ["conv58"], 
+            "input_shapes": [[-1, 7, 7, 1024]], 
+            "output_shapes": [[-1, 1, 1, 1024]], 
+            "original_names": ["InceptionV1/Logits/AvgPool_0a_7x7/AvgPool"], 
+            "params": {
+                "kernel_shape": [1, 7, 7, 1], 
+                "strides": [1, 1, 1, 1], 
+                "padding": "VALID"
+            }
+        }, 
+        "conv58": {
+            "type": "conv", 
+            "input": ["avgpool1"], 
+            "output": ["output_layer1"], 
+            "input_shapes": [[-1, 1, 1, 1024]], 
+            "output_shapes": [[-1, 1, 1, 1001]], 
+            "original_names": ["InceptionV1/Logits/Conv2d_0c_1x1/Conv2D", "InceptionV1/Logits/Conv2d_0c_1x1/BiasAdd"], 
+            "params": {
+                "kernel_shape": [1, 1, 1024, 1001], 
+                "strides": [1, 1, 1, 1], 
+                "dilations": [1, 1, 1, 1], 
+                "padding": "SAME_TENSORFLOW", 
+                "batch_norm": false, 
+                "elementwise_add": false, 
+                "activation": "linear"
+            }
+        }, 
+        "output_layer1": {
+            "type": "output_layer", 
+            "input": ["conv58"], 
+            "output": [], 
+            "input_shapes": [[-1, 1, 1, 1001]], 
+            "output_shapes": [[-1, 1, 1, 1001]], 
+            "original_names": ["out"]
+        }
+    }
+}
