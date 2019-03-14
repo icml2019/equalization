@@ -4,6 +4,7 @@
 '''
 import copy
 import numpy as np
+import sys
 
 from dnn_objects import LayerType, ActivationType
 from net_x import HNImporter
@@ -82,7 +83,7 @@ class ParamsEqualizer(object):
         successors_kernels = []
         for successor in self._net_x.successors(layer):
             if 'conv' in successor.name or 'batch_norm' in successor.name:
-                kernel = self._equalized_params[self._net_x.name + '/' + successor.name].kernel
+                kernel = self._equalized_params[self._net_x.name + '/' + successor.name + "/kernel:0"]
                 kernel_max = np.max(np.abs(kernel))
                 if (successor.ew_add_enabled and successor.ew_add_connections[0] == layer):
                     successors_kernels = successors_kernels + self.get_successor_kernel_scale(successor, start_channel, end_channel)
@@ -93,7 +94,7 @@ class ParamsEqualizer(object):
                 else:
                     assert False, "Unknown kernel shape"
             elif successor.op == LayerType.dw:
-                kernel = self._equalized_params[self._net_x.name + '/' + successor.name].kernel
+                kernel = self._equalized_params[self._net_x.name + '/' + successor.name + "/kernel:0"]
                 kernel_max = np.max(np.abs(kernel))
                 successors_kernels = successors_kernels + [np.max(np.abs(kernel[:, :, start_channel:end_channel, :]), axis=(0, 1, 3)) / kernel_max]
             elif 'pool' in successor.name:
@@ -259,6 +260,11 @@ class ParamsEqualizer(object):
 
 if __name__ == "__main__":
     net_names = ['inception_v1', 'resnet_v1_18', 'inception_v3', 'densenet121', 'mobilenet_v2_1.4_224']
+    if (len(sys.argv)>1):
+        two_steps = (sys.argv[1] == "two_steps")
+    else:
+        two_steps = False
+    print "Two steps = {}".format(two_steps)
     for net_name in net_names:
         importer = HNImporter()
         hn_file = 'nets/{}.hn'.format(net_name)
@@ -267,5 +273,7 @@ if __name__ == "__main__":
         eq = ParamsEqualizer(importer._net_x)
         params = dict(np.load('nets/{}_params.npz'.format(net_name)))
         conv_layer_inference = np.load('nets/{}_layer_inference_data.npz'.format(net_name))
-        eq_params = eq.equalize_model(params, conv_layer_inference)
+        eq_params = eq.equalize_model(params, conv_layer_inference, two_steps=two_steps)
         np.savez('nets/{}_params_eq.npz'.format(net_name), **eq_params)
+
+
