@@ -1,6 +1,5 @@
 backports.shutil-get-terminal-size==1.0.0
 decorator==4.3.2
-enum==0.4.7
 enum34==1.1.6
 ipdb==0.11
 ipython==5.8.0
