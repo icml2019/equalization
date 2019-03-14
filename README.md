@@ -1,4 +1,4 @@
-# equalozation_code
+# equalization_code
 
 This code is an implementation example of the equalization algorithm as introduce in the paper 
 
