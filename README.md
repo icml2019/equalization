@@ -7,7 +7,7 @@ Through Weight Factorization.
 
 To use this repository you need to install git LFS. Follow the instructions here: https://git-lfs.github.com/.
 
-After cloning the reposetory install the requirements
+After cloning the reposetory install the requirements.
  
 ```bash
 pip install -r requirements
@@ -22,7 +22,7 @@ python equalization.py
 ```
 Two step algorithm can be run by calling 
 ```bash
-python equalization.py --two_steps
+python equalization.py two_steps
 ```
 
 The script will generate post equalization weights and store them to files <*._params_eq.npz>
